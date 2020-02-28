@@ -1,0 +1,32 @@
+#mycoupon{
+  // 防止渗漏
+  .Coupon-list{
+    border: 1px dashed #ffffff;
+    width: 99.5%;
+    display: flex;
+    line-height: 36px;
+    align-items: center;
+    justify-content: space-around;
+    height: 110px
+  }
+  .Coupona{
+    width: 45%;
+    height: 135px;
+    padding: 10px;
+    display: inline-block;
+    margin-bottom: 20px;
+    background-color: #33CCD3!important;
+    /*background-image: linear-gradient(to right, #FBE3B8 , #FCF1DA);*/
+  }
+  .Couponab{
+    cursor:pointer;
+    width: 45%;
+    height: 135px;
+    padding: 10px;
+    display: inline-block;
+    margin-bottom: 20px;
+    background-color: #33CCD3!important;
+    opacity: .5;
+    /*background-image: linear-gradient(to right, #FBE3B8 , #FCF1DA);*/
+  }
+}

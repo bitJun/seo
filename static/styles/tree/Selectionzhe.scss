@@ -1,0 +1,103 @@
+.orderthid::after{
+  content: '';
+  width: 32%;
+}
+.tabs-list{
+  margin: 20px 0;
+}
+.tabs-list div{
+  border: 1px solid #CFCFCF;
+  width: 99px;
+  height: 33px;
+  text-align: center;
+  line-height: 33px;
+  border-radius: 20px;
+}
+.el-pager li.active{
+  color: #33CCD3;
+}
+.el-pager li:hover{
+  color: #33CCD3;
+}
+.el-tabs__item:hover {
+  color: #33CCD3;
+}
+.over-list {
+  margin: 0;
+  font-size: 14px;
+  overflow: hidden;  /** 隐藏超出的内容 **/
+  word-break: break-all;
+  text-overflow: ellipsis; /** 多行 **/
+  display: -webkit-box; /** 对象作为伸缩盒子模型显示 **/
+  -webkit-box-orient: vertical; /** 设置或检索伸缩盒对象的子元素的排列方式 **/
+  -webkit-line-clamp: 2; /** 显示的行数 **/
+}
+.Interlayer{
+  width: 1169px;
+  display: flex;
+  margin: 1% auto;
+  justify-content: space-between
+}
+#kdd1 {
+  .dashboard-font{
+    /*width: 1169px;*/
+    margin: 1% auto;
+  }
+  .el-tabs__header{
+    width: 1169px;
+    margin: 0 auto;
+  }
+  /*tab切换课程大纲和讲义*/
+  .el-tabs__nav-wrap::after{
+    width: 0
+  }
+  .el-tabs__active-bar {
+    display: none;
+  }
+  .el-tabs__item{
+    margin-right: 20px;
+    padding: 0 20px;
+    border-radius: 20px;
+    border: 1px solid #cfcfcf;
+    margin-bottom: 14px;
+    font-size: 14px;
+    width: 90px;
+    text-align: center;
+  }
+  .el-tabs__item.is-active{
+    background: #33CCD3;
+    color: #ffffff;
+    border: 1px solid #33CCD3;
+  }
+  /*课程标签页*/
+  .el-tabs__nav-prev, .el-tabs__nav-next{
+    display: none;
+  }
+  .el-tabs__nav-wrap.is-scrollable{
+    padding: 0;
+    overflow:auto;
+  }
+  .el-tabs__nav{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: left;
+  }
+  .el-scrollbar__view{
+    display: flex;
+  }
+  .hoverlist:hover{
+    box-shadow: 0px 0px 20px 10px rgba(210,210,210,.5);
+    transition: box-shadow 0.5s;
+  }
+  .only-one{
+    width: 100%;
+    /*height: 26px;*/
+    /*line-height: 16px;*/
+    display: block;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    -ms-text-overflow: ellipsis;
+    white-space:nowrap;
+    color: #849191;
+  }
+}

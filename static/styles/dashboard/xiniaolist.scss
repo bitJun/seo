@@ -1,0 +1,214 @@
+.contentimglist p img {
+    /*炸弹*/
+    margin: 0 auto;
+    display: block;
+    width: 100%;
+}
+
+.contentimglist {
+    margin-top: 10px;
+    width: 730px;
+    overflow-y: auto;
+    overflow-x: hidden;
+}
+
+.video-body {
+    width: 1169px;
+    background: #ffffff;
+    border-radius: 10px;
+    /*height: 782px;*/
+    margin: 1% auto;
+    padding: 30px 14px;
+    display: flex;
+    .title {
+        font-size: 20px;
+        color: #333333;
+        font-weight: bold;
+    }
+    .share-img img {
+        width: 25px;
+        height: 25px;
+        vertical-align: middle;
+        margin-bottom: 4px;
+        cursor: pointer;
+    }
+}
+
+.titles {
+    width: 1169px;
+    margin: 10px auto;
+}
+
+#moveImg {
+    width: 1169px;
+    background: transparent;
+    margin: 0 auto;
+    margin-bottom: 40px;
+    .play_mp4 {
+        display: none;
+    }
+    .play_mp4ed {
+        display: block!important;
+    }
+    ul {
+        list-style: none;
+    }
+    a {
+        text-decoration: none;
+    }
+    img {
+        border: none;
+    }
+    body {
+        background: #f2f2f2;
+        font-size: 14px;
+    }
+    .lc {
+        width: 1169px;
+        margin: 0 auto;
+        overflow: hidden;
+    }
+    .amount {
+        font-size: 40px;
+    }
+    .lc .items .btn {
+        color: #ff6200;
+        background-color: #ffe7d8;
+        height: 40px;
+        width: 192px;
+        transition: color .4s, opacity .4s;
+        font-size: 16px;
+        line-height: 22px;
+        white-space: nowrap;
+        vertical-align: middle;
+        padding: 6px 12px;
+        border: 1px solid transparent;
+        border-radius: 3px;
+        text-align: center;
+        display: inline-block;
+        cursor: pointer;
+    }
+    .lc .items .btn:hover {
+        opacity: 0.8;
+    }
+    .lc .items a {
+        transition: color .4s, opacity .4s;
+        color: #fff;
+    }
+    .lc .items .right {
+        float: left;
+        width: 1169px;
+        position: relative;
+        overflow: hidden;
+    }
+    .lc .items .right ul li {
+        background-color: #fff;
+        margin-right: 25px;
+        text-align: center;
+        float: left;
+        width: 290px;
+        height: 327px;
+        -webkit-transition: box-shadow .2s ease-out;
+        transition: box-shadow .2s ease-out;
+    }
+    .lc .items .right ul li h3 a {
+        color: #323232;
+    }
+    .lc .items .right ul li .btn {
+        background-color: #ff6200;
+        color: #fff;
+    }
+    .lc .items .right ul li .btn.sq {
+        background-color: #e6e6e6;
+    }
+    .lc .items .right .next,
+    .lc .items .right .prev {
+        opacity: 0;
+        position: absolute;
+        top: 50%;
+        transform: translateY(-50%);
+        display: inline-block;
+        cursor: pointer;
+        z-index: 1;
+        width: 28px;
+        height: 28px;
+        line-height: 30px;
+        color: #fff;
+        border-radius: 50%;
+        text-align: center;
+        font-size: 22px;
+        font-weight: 400;
+        background: rgba(0, 0, 0, .2);
+        font-family: simsun;
+        transition: all ease-in .4s;
+    }
+    .lc .items .right .next {
+        left: 0px;
+    }
+    .lc .items .right .prev {
+        right: 0px;
+    }
+    .lc .items .right:hover .next {
+        opacity: 1;
+    }
+    .lc .items .right:hover .prev {
+        opacity: 1;
+    }
+    .tempWrap {
+        width: 1169px!important;
+    }
+    .picList li {
+        width: 214px!important;
+        height: 225px!important;
+        border-radius: 10px;
+        cursor: pointer;
+        margin-top: 10px;
+    }
+    .picList li:hover {
+        margin-top: 0;
+    }
+    .picList li p {
+        text-align: left;
+        padding: 0 11px;
+        margin: 8px 0;
+    }
+    .picList li .p3 {
+        color: #333333;
+        font-size: 16px;
+        height: 36px;
+    }
+    .picList li .p4 {
+        color: #9AABB8;
+        font-size: 14px;
+    }
+    .picList li .x3 {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        span {
+            color: #E6213A;
+            span {
+                font-size: 20px;
+            }
+        }
+    }
+    .picList li img {
+        width: 214px;
+        height: 120px;
+        border-radius: 10px 10px 0 0;
+    }
+}
+
+.over-lists {
+    overflow: hidden;
+    /** 隐藏超出的内容 **/
+    word-break: break-all;
+    text-overflow: ellipsis;
+    /** 多行 **/
+    display: -webkit-box;
+    /** 对象作为伸缩盒子模型显示 **/
+    -webkit-box-orient: vertical;
+    /** 设置或检索伸缩盒对象的子元素的排列方式 **/
+    -webkit-line-clamp: 2;
+    /** 显示的行数 **/
+}

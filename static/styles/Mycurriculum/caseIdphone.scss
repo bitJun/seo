@@ -1,0 +1,61 @@
+.curriculum {
+    width: 1169px;
+    margin: 1% auto;
+}
+
+.tabs_list {
+    display: flex;
+    align-items: center;
+    margin-top: 30px;
+}
+
+.tabs_list_items {
+    width: 1169px;
+    background: #ffffff;
+    padding-left: 50px;
+    line-height: 60px;
+}
+
+.el-tabs__nav {
+    width: 100%;
+    display: flex;
+    justify-content: space-around;
+}
+
+.el-progress {
+    line-height: 3;
+}
+
+.el-radio__inner {
+    display: none;
+}
+
+.el-radio__input.is-checked+.el-radio__label {
+    color: #ffffff;
+}
+
+.Coupon {
+    width: 45%;
+    height: 135px;
+    padding: 10px;
+    background-color: #33CCD3;
+    /*background-image: linear-gradient(to right, #FBE3B8 , #FCF1DA);*/
+}
+
+.Coupon_lost {
+    width: 45%;
+    height: 135px;
+    padding: 10px;
+    background-color: #FBE3B8;
+    background-image: linear-gradient(to right, #DBDBDB, #ECECEC);
+}
+
+.Coupon-list {
+    border: 1px solid #ffffff;
+    width: 99.5%;
+    display: flex;
+    line-height: 36px;
+    align-items: center;
+    justify-content: space-around;
+    height: 110px
+}

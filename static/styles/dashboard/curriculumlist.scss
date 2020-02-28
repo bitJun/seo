@@ -1,0 +1,70 @@
+.over-listsss {
+    display: block;
+    height: 28px;
+    width: 100%;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    -ms-text-overflow: ellipsis;
+    white-space: nowrap;
+    color: #333333;
+}
+
+h2 {
+    height: 28px;
+    width: 100%;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    -ms-text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.Interlayer {
+    width: 1169px;
+    display: flex;
+    margin: 1% auto;
+    justify-content: space-between
+}
+
+#kdd1 {
+    .dashboard-font {
+        width: 1169px;
+        margin: 1% auto;
+    }
+    /*tab切换课程大纲和讲义*/
+    .el-tabs__nav-wrap::after {
+        width: 0
+    }
+    .el-tabs__active-bar {
+        display: none;
+    }
+    .el-tabs__item {
+        background: #F5F5F5;
+        margin-right: 20px;
+        padding: 0 20px;
+        border-radius: 20px;
+        border: 1px solid #999999;
+        margin-bottom: 14px;
+    }
+    .el-tabs__item.is-active {
+        background: #33CCD3;
+        color: #ffffff;
+        border: 1px solid #33CCD3;
+    }
+    /*课程标签页*/
+    .el-tabs__nav-prev,
+    .el-tabs__nav-next {
+        display: none;
+    }
+    .el-tabs__nav-wrap.is-scrollable {
+        padding: 0;
+        overflow: auto;
+    }
+    .el-tabs__nav {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: left;
+    }
+    .el-scrollbar__view {
+        display: flex;
+    }
+}

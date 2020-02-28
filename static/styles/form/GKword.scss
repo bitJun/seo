@@ -1,0 +1,100 @@
+.alllist {
+    position: relative;
+}
+
+.play_mp4 {
+    display: none;
+}
+
+.play_mp4ed {
+    display: block!important;
+}
+
+.list::after {
+    content: '';
+    width: 214px;
+    border: 1px solid transparent;
+    overflow: hidden;
+}
+
+.list {
+    width: 214px;
+    border: 1px solid transparent;
+    overflow: hidden;
+    display: flex;
+    justify-content: center;
+}
+
+.alldisplay {
+    width: 1169px;
+    margin: 1% auto;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    text-align: justify;
+}
+
+.alldisplay div,
+.alldisplays div {
+    cursor: pointer;
+}
+
+.alldisplays {
+    width: 1169px;
+    margin: 1% auto;
+    display: flex;
+    justify-content: left;
+}
+
+.alllist {
+    margin: 10px auto;
+    width: 1169px;
+    .el-tabs__item:hover {
+        color: #33CCD3
+    }
+    .el-tabs__active-bar {
+        background-color: #33CCD3;
+    }
+}
+
+#twolist {
+    /*tab切换课程大纲和讲义*/
+    .el-tabs__nav-wrap::after {
+        width: 0
+    }
+    .el-tabs__active-bar {
+        display: none;
+    }
+    .el-tabs__item {
+        height: 20px;
+        color: #A2A2A2;
+        line-height: 20px;
+        margin-right: 5px;
+        /*width: 80px;*/
+        padding: 0 15px;
+        text-align: center;
+        font-size: 16px;
+        border-radius: 0;
+    }
+    .el-tabs__item.is-active {
+        color: #33CCD3;
+        background: transparent;
+        border: 1px solid transparent;
+    }
+    .el-tabs__nav :not(#tab-0) {
+        border-left: 1px solid #A2A2A2;
+    }
+    .el-tabs__header {
+        margin-bottom: 30px;
+    }
+    .only-over-lists {
+        overflow: hidden;
+        word-break: break-all;
+        height: 40px;
+        text-overflow: ellipsis;
+        display: -webkit-box;
+        -webkit-box-orient: vertical;
+        -webkit-line-clamp: 2;
+        line-height: 20px;
+    }
+}

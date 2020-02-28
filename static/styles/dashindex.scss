@@ -1,0 +1,84 @@
+@media screen and (max-width: 1201px) {
+  .app-main{
+    text-align: center!important;
+  }
+  .dashboard-container{
+    display: inline-block !important;
+    height: 958px;
+    width: 770px !important;
+    background: #ffffff;
+    margin: 0 auto !important;
+    text-align: center;
+    padding-left: 0 !important;
+  }
+  .el-carousel{
+    background: #ffffff;
+    text-align: center;
+  }
+  .dashboard-img{
+    width: 770px;
+    height: auto;
+    padding-top: 20px;
+    background: #ffffff;
+  }
+  .bannerImg{
+      width: 712px !important;
+      height: 428px !important;
+      margin: auto;
+    text-align: center;
+  }
+  .dashboard-font{
+    padding: 30px;
+    margin: 40px auto;
+    display: inline-block;
+    background: #ffffff;
+    width: 100%;
+  }
+  .dashboard-font{
+    width: 770px !important;
+  }
+  .Interlayer{
+    width: 770px !important;
+  }
+  .ss{
+    margin: 5% auto 2% !important;
+  }
+  .d1{
+    width: 770px !important;
+  }
+  .d1-1{
+    width: 49%  !important;
+    text-align: left;
+  }
+  .d2{
+    width: 770px !important;
+    display: inline-block !important;
+    text-align: left !important;
+    margin: 0 auto;
+  }
+  .d2-1{
+    display: inline-block;
+    width: 49% !important;
+    margin-bottom: 40px;
+    text-align: left;
+  }
+  .d2-1 div{
+    text-align: left;
+  }
+  .d2 :nth-child(2){
+    margin-left: 2%;
+  }
+  .d2-2{
+    margin-left: 0 !important;
+  }
+  .d2-2 div{
+    margin-left: 0 !important;
+  }
+  .conter_body{
+    width: 960px !important;
+  }
+  .bannerImg{
+    width: 720px;
+    height: 428px
+  }
+}

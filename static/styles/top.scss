@@ -1,0 +1,17 @@
+.top_view {
+  height: 60px;
+  line-height: 60px;
+  overflow: hidden;
+  position: relative;
+  background: #f1f5f8;
+  border-bottom: 1px solid #dedede;
+  padding-left: 220px;
+  &_left {
+    float: left;
+    padding-left: 40px;
+  }
+  &_right {
+    float: right;
+    padding-right: 30px;
+  }
+}

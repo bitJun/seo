@@ -1,0 +1,108 @@
+.contentimglist td {
+    border-style: solid !important;
+}
+
+.share-img img {
+    width: 25px;
+    height: 25px;
+    vertical-align: middle;
+    margin-bottom: 4px;
+    cursor: pointer;
+}
+
+.comments_list_box {
+    background: #F5F5F5;
+    margin-right: 40px;
+    padding: 20px;
+    font-size: 14px;
+    margin-left: 110px;
+    position: relative;
+}
+
+.comments_list_box::after {
+    width: 0;
+    height: 0;
+    display: block;
+    content: "";
+    position: absolute;
+    top: -15px;
+    left: 0;
+    z-index: 10;
+    border: 20px solid transparent;
+    border-left: 20px solid #f5f5f5;
+}
+
+.content_name {
+    color: #33CCD3;
+}
+
+.content_hf {
+    color: #999999;
+}
+
+.contentimglist p img {
+    /*炸弹*/
+    margin: 0 auto;
+    display: block;
+    width: 100%;
+}
+
+.contentimglist {
+    margin-top: 10px;
+    width: 780px;
+    overflow-y: auto;
+    overflow-x: hidden;
+}
+
+.over-list {
+    height: 28px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    -ms-text-overflow: ellipsis;
+    white-space: nowrap;
+    cursor: pointer;
+}
+
+.left-img {
+    list-style: none;
+    position: fixed;
+    bottom: 83px;
+    z-index: 99;
+    right: 24px;
+}
+
+.left-img li:first-child {
+    margin-bottom: 10px;
+}
+
+.left-img .scroll_bottom {
+    width: 48px;
+    height: 48px;
+    cursor: pointer;
+    background-image: url('/images/liicon/pinglun.png');
+    background-size: cover;
+}
+
+.left-img .scroll_bottom:hover {
+    width: 48px;
+    height: 48px;
+    cursor: pointer;
+    background-image: url('/images/liicon/pinglun-h.png');
+    background-size: cover;
+}
+
+.left-img .shoucangimg {
+    width: 48px;
+    height: 48px;
+    cursor: pointer;
+    background: url('/images/liicon/shoucang.png');
+    background-size: cover;
+}
+
+.left-img .shoucangimg:hover {
+    width: 48px;
+    height: 48px;
+    cursor: pointer;
+    background-image: url('/images/liicon/shoucang-h.png');
+    background-size: cover;
+}

@@ -1,0 +1,85 @@
+.el-tabs__content{
+  border-radius: 10px;
+}
+.el-pager li.active{
+  color: #33CCD3;
+}
+.el-pager li:hover{
+  color: #33CCD3;
+}
+.addkuang:hover{
+  border: 2px solid #33CCD3;
+  border-bottom: 2px solid #33CCD3!important;
+}
+.addkuang{
+  border-bottom: 1px solid #E1E7EB!important;
+  border: 2px solid transparent;
+}
+.el-tabs__item:hover {
+  color: #33CCD3;
+}
+#Bklist{
+  .el-pagination{
+    height: 80px;
+    line-height: 80px;
+    background: #ffffff;
+  }
+  .dashboard-font{
+    width: 1169px;
+    margin: 1% auto;
+  }
+  .Interlayer{
+    display: flex;
+    margin: 1% auto;
+    justify-content: space-between
+  }
+  /*tab切换课程大纲和讲义*/
+  .el-tabs__nav-wrap::after{
+    width: 0
+  }
+  .el-tabs__active-bar {
+    display: none;
+  }
+  .el-tabs__item{
+    background: #F5F5F5;
+    margin-right: 20px;
+    color: #666666;
+    padding: 0 20px;
+    border-radius: 20px;
+    border: 1px solid #999999;
+  }
+  .el-tabs__item.is-active{
+    background: #33CCD3;
+    color: #ffffff;
+    border: 1px solid #33CCD3;
+  }
+}
+/*.over-list >p:not(:first-child) {*/
+/*  display: none;*/
+/*}*/
+.over-list {
+  /*width: 100%;*/
+  height: 40px;
+  line-height: 20px;
+  /*text-overflow: ellipsis;*/
+  /*-ms-text-overflow: ellipsis;*/
+  /*white-space:nowrap;*/
+  color: #849191;
+  margin: 0;
+  font-size: 14px;
+  overflow: hidden;  /** 隐藏超出的内容 **/
+  word-break: break-all;
+  text-overflow: ellipsis; /** 多行 **/
+  display: -webkit-box; /** 对象作为伸缩盒子模型显示 **/
+  -webkit-box-orient: vertical; /** 设置或检索伸缩盒对象的子元素的排列方式 **/
+  -webkit-line-clamp: 2; /** 显示的行数 **/
+}
+.titlelist{
+  width: 100%;
+  display: block;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  -ms-text-overflow: ellipsis;
+  white-space:nowrap;
+  margin: 0;
+}
