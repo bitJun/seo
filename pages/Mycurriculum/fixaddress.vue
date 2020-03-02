@@ -488,7 +488,7 @@ export default {
     },
     setdetail(item) {
       this.$router.push({
-        path: '/nested/menulist',
+        path: '/ziliao/menulist',
         query: {
           detail: item
         }

@@ -116,12 +116,12 @@ export default {
     },
     topnum() {
       this.$router.push({
-        path: '/nested/Reference'
+        path: '/ziliao/Reference'
       })
     },
     setdateilss(item) {
       this.$router.push({
-        path: '/nested/menulist',
+        path: '/ziliao/menulist',
         query: {
           detail: item.id
         }

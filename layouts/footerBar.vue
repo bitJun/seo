@@ -41,13 +41,19 @@ export default {
       this.$router.push({ path: '/external-link/statement' })
     },
     sethtml() {
-      window.location.href = 'http://www.beian.miit.gov.cn/state/outPortal/loginPortal.action'
+      if (typeof window == 'object') {
+        window.location.href = 'http://www.beian.miit.gov.cn/state/outPortal/loginPortal.action'
+      }
     },
     setInmg() {
-      window.location.href = 'https://gk-pc.oss-cn-beijing.aliyuncs.com/handout/cf4bb40e9e7b0368d1df38fff3cb346d111.zip'
+      if (typeof window == 'object') {
+        window.location.href = 'https://gk-pc.oss-cn-beijing.aliyuncs.com/handout/cf4bb40e9e7b0368d1df38fff3cb346d111.zip'
+      }
     },
     settudou() {
-      window.location.href = 'https://www.imtudo.com/'
+      if (typeof window == 'object') {
+        window.location.href = 'https://www.imtudo.com/'
+      }
     }
   }
 }

@@ -5,8 +5,11 @@ module.exports = {
   ** Headers of the page
   */
   server: {
-    port: 3009, // default: 3000
+    port: 9008, // default: 3000
     host: 'localhost' // default: localhost
+  },
+  router: {
+    linkExactActiveClass: 'exact-active-link'
   },
   head: {
     title: process.env.npm_package_name || '',
@@ -16,7 +19,9 @@ module.exports = {
       { hid: 'description', name: 'description', content: process.env.npm_package_description || '' }
     ],
     script: [
-      { src: 'https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js' }
+      { src: 'https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js' },
+      { src: 'http://cdn.jsdelivr.net/npm/eruda' },
+      { src: 'https://qiyukf.com/script/8dcfd5a9f9ae2d6448afedac9090773b.js?hiddden=1' }
     ],
     link: [
       { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' }
@@ -38,8 +43,8 @@ module.exports = {
   ** Plugins to load before mounting the App
   */
   plugins: [
-    '@/plugins/element-ui',
-    '@/plugins/videoplayer'
+    '~plugins/element-ui',
+    { src: '~plugins/nuxt-video-player-plugin.js', ssr: false }
   ],
   /*
   ** Nuxt.js dev-modules
@@ -62,14 +67,14 @@ module.exports = {
       target: 'https://wapapi.xiniaogongkao.com', // 代理地址
       changeOrigin: true,
       pathRewrite: {
-        '^/api': '', //将 /api 替换掉
+        '^/Fco': '', //将 /api 替换掉
       },
     },
     '/App': {
       target: 'https://testapp.xiniaogongkao.com', // 代理地址
       changeOrigin: true,
       pathRewrite: {
-        '^/api': '', //将 /api 替换掉
+        '^/App': '', //将 /api 替换掉
       },
     },
     '/api': {

@@ -163,7 +163,7 @@ export default {
     },
     upvideo(items) {
       this.$router.push({
-        path: '/GKword/GKlist',
+        path: '/gkbaike/GKlist',
         query: {
           happyid: items.id
         }

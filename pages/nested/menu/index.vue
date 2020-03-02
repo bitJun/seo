@@ -239,7 +239,7 @@ export default {
     },
     setdetail(item) {
       this.$router.push({
-        path: '/nested/menulist',
+        path: '/ziliao/menulist',
         query: {
           detail: item.id,
           campus_id: this.campus_id
@@ -372,7 +372,7 @@ export default {
     },
     whatinputup() {
       this.$router.push({
-        path: '/nested/search',
+        path: '/ziliao/search',
         query: {
           whatinput: this.whatinput,
           campus_id: this.campus_id

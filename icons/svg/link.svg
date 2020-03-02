@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="28px" height="28px" viewBox="0 0 28 28" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 54 (76480) - https://sketchapp.com -->
+    <title>移动下载</title>
+    <desc>Created with Sketch.</desc>
+    <g id="移动下载" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="编组-10复制-2" transform="translate(8.000000, 6.000000)">
+            <rect id="矩形" stroke="#3E3A39" stroke-width="1.2" x="0.6" y="0.6" width="10.8" height="15.8" rx="4"></rect>
+            <circle id="椭圆形" fill="#3E3A39" cx="7.5" cy="2.5" r="1"></circle>
+            <circle id="椭圆形" fill="#3E3A39" cx="6" cy="14" r="1"></circle>
+            <path d="M4.5,2.5 L6.43270408,2.5" id="直线-3" stroke="#3E3A39" stroke-linecap="round"></path>
+        </g>
+    </g>
+</svg>

@@ -402,7 +402,7 @@ export default {
     },
     GKlist(item) {
       this.$router.push({
-        path: '/GKword/GKK',
+        path: '/gkbaike/GKK',
         query: {
           itemlist: item.id,
           campus_id: this.campus_id
@@ -420,7 +420,7 @@ export default {
         })
       } else if (item.type === 3 || item.type === 8) {
         this.$router.push({
-          path: '/example/details',
+          path: '/class/details',
           query: {
             itemlist: item.id,
             campus_id: this.campus_id
@@ -431,7 +431,7 @@ export default {
           window.open(item.target_url, '_blank')
         } else {
           this.$router.push({
-            path: '/example/details',
+            path: '/class/details',
             query: {
               itemlist: item.target_url
             }
@@ -440,7 +440,7 @@ export default {
       }
     },
     dakaying(item) {
-      // this.$router.push({ path: '/example/DKdetails', query: { itemlist: item.id, campus_id: this.campus_id }})
+      // this.$router.push({ path: '/class/DKdetails', query: { itemlist: item.id, campus_id: this.campus_id }})
       this.$router.push({
         path: 'dashboard/allDKdetails',
         query: {

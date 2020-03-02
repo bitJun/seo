@@ -319,7 +319,7 @@ export default {
     },
     GKlist(item) {
       this.$router.push({
-        path: '/GKword/GKK',
+        path: '/gkbaike/GKK',
         query: {
           itemlist: item.id,
           campus_id: this.campus_id

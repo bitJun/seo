@@ -1,13 +1,12 @@
 <template>
     <div class="app-wrapper openSidebar withoutAnimation">
         <layout />
-        <!-- <top /> -->
         <div class="main-container">
             <Navbar />
             <div class="app-main">
                 <nuxt />
             </div>
-            
+
             <footerBar />
         </div>
     </div>
@@ -16,15 +15,13 @@
 <script>
 import layout from './lauout.vue';
 import Navbar from './Navbar.vue';
-import top from './top.vue';
 import footerBar from './footerBar.vue';
 export default {
     name: 'Layout',
     components: {
         layout,
         Navbar,
-        footerBar,
-        top
+        footerBar
     }
 }
 </script>

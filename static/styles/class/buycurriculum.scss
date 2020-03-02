@@ -1,0 +1,91 @@
+.dialog_lists{
+  width: 34% !important
+}
+#app-list{
+  .el-radio__input.is-checked .el-radio__inner{
+    background: #33CCD3;
+    border-color: #33CCD3;
+  }
+  .el-radio__input.is-checked+.el-radio__label{
+    color: #606266;
+  }
+  .el-radio-group{
+    width: 100%;
+  }
+  .el-radio__input{
+    float: right;
+  }
+  .el-radio{
+    display: block;
+    width: 100%;
+    margin: 30px 0;
+  }
+  .pay_all{
+    margin: 1% auto;
+    width: 1169px;
+    background: #ffffff;
+    height: 200px;
+    border-radius: 10px;
+  }
+  .pay_information{
+    display: flex;
+    text-align: center;
+    justify-content: space-around;
+  }
+  .pay_information_list{
+    text-align: center;
+  }
+  .pay_information_list div:first-child{
+    color: #909090;
+  }
+  .pay_information_lists div:first-child{
+    color: #909090;
+  }
+  .pay_information_list div{
+    margin-bottom: 20px;
+  }
+  .pay_information_lists{
+    text-align: left;
+  }
+  .pay_information_lists div{
+    margin-bottom: 20px;
+  }
+  .pay_all >div{
+    padding: 30px 20px 0 20px;
+  }
+  .pay_Coupon{
+    margin: 1% auto;
+    background: #ffffff;
+    width: 1169px;
+    padding: 40px 20px;
+    border-radius: 10px;
+  }
+  .pay_to{
+    margin: 1% auto;
+    background: #ffffff;
+    width: 1169px;
+    padding: 40px 20px;
+    border-radius: 10px;
+  }
+  .pay_in{
+    margin: 1% auto;
+    background: #ffffff;
+    width: 1169px;
+    padding: 40px 20px;
+    border-radius: 10px;
+  }
+  .pay_in_list{
+    display: flex;
+    justify-content: space-between;
+  }
+  .paytoRmb{
+    border-radius: 25px;
+    height: 50px;
+    line-height: 50px;
+    background: #E6213A;
+    color: #ffffff;
+    font-size: 14px;
+    width: 166px;
+    text-align: center;
+  }
+}

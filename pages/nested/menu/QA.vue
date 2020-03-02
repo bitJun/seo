@@ -179,7 +179,7 @@ export default {
     setdetails(index, item) {
       if (index === 0 || index === '0') {
         this.$router.push({
-          path: '/videoLibrary/videoLibrary'
+          path: '/xibanqiu'
         })
       } else {
         window.open(item.redirect_url, '_blank')
@@ -187,7 +187,7 @@ export default {
     },
     setdetail(item) {
       this.$router.push({
-        path: '/nested/menulist',
+        path: '/ziliao/menulist',
         query: {
           detail: item.id
         }

@@ -1,0 +1,112 @@
+#opencurriculums {
+  .el-scrollbar .el-scrollbar__wrap .el-scrollbar__view {
+    white-space: nowrap;
+  }
+
+  .play_mp4 {
+    display: none;
+  }
+  .over-listsss {
+    height: 28px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    -ms-text-overflow: ellipsis;
+    white-space:nowrap;
+  }
+  .orderthid::after {
+    content: '';
+    width: 32%;
+  }
+
+  .play_mp4ed {
+    display: block !important;
+  }
+
+  .list::after {
+    content: '';
+    width: 214px;
+    border: 1px solid transparent;
+    overflow: hidden;
+  }
+
+  .list {
+    width: 214px;
+    border: 1px solid transparent;
+    overflow: hidden;
+    display: flex;
+    justify-content: center;
+  }
+
+  .alldisplay {
+    width: 1169px;
+    margin: 1% auto;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    text-align: justify;
+  }
+
+  .alldisplay div,
+  .alldisplays div {
+    cursor: pointer;
+  }
+
+  .alldisplays {
+    width: 1169px;
+    margin: 1% auto;
+    display: flex;
+    justify-content: left;
+  }
+
+  .alllist {
+    margin: 10px auto;
+    width: 1169px;
+
+    .el-tabs__item:hover {
+      color: #33CCD3
+    }
+
+    .el-tabs__active-bar {
+      background-color: #33CCD3;
+    }
+
+    .el-tabs__item {
+      color: #A2A2A2;
+      font-size: 18px;
+      height: 60px;
+      line-height: 60px;
+    }
+
+    .el-tabs__item.is-active {
+      color: #333;
+    }
+  }
+
+  #opencurriculums_main {
+    /*tab切换课程大纲和讲义*/
+    .el-tabs__nav-wrap::after {
+      width: 0
+    }
+
+    .el-tabs__active-bar {
+      display: none;
+    }
+
+    .el-tabs__item {
+      height: 28px;
+      line-height: 28px;
+      margin-right: 5px;
+      /*width: 80px;*/
+      padding: 0 15px;
+      text-align: center;
+      border-radius: 20px;
+      font-size: 16px;
+    }
+
+    .el-tabs__item.is-active {
+      border: 1px solid #33CCD3;
+      color: #ffffff;
+      background: #33CCD3;
+    }
+  }
+}

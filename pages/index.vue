@@ -248,7 +248,14 @@
                                   :options="playerOptions"
                                   @play="onPlayerPlay($event)"
                                   @pause="onPlayerPause($event)" style="width: 700px;" /> -->
-                <div class="video-player-box video-player vjs-custom-skin" :playsinline="true" ref="videoPlayer" @play="onPlayerPlay($event)" @pause="onPlayerPause($event)" @ended="onPlayerEnded($event)" @loadeddata="onPlayerLoadeddata($event)" @waiting="onPlayerWaiting($event)" @playing="onPlayerPlaying($event)" @timeupdate="onPlayerTimeupdate($event)" @canplay="onPlayerCanplay($event)" @canplaythrough="onPlayerCanplaythrough($event)" @ready="playerReadied" @statechanged="playerStateChanged($event)" style="width: 700px;" v-video-player:myVideoPlayer="playerOptions">
+                <div
+                  class="video-player-box video-player vjs-custom-skin"
+                  :playsinline="true"
+                  ref="videoPlayer"
+                  @play="onPlayerPlay($event)"
+                  @pause="onPlayerPause($event)"
+                  style="width: 700px;"
+                  v-video-player:myVideoPlayer="playerOptions">
                 </div>
               </div>
             </el-tab-pane>
@@ -555,7 +562,7 @@ export default {
     },
     GKlist(item) {
       this.$router.push({
-        path: '/GKword/GKK',
+        path: '/gkbaike/GKK',
         query: {
           itemlist: item.id,
           campus_id: 0
@@ -576,7 +583,7 @@ export default {
     },
     gobaike(item) {
       this.$router.push({
-        path: '/GKword/GKlist',
+        path: '/gkbaike/GKlist',
         query: {
           happyid: item.id
         }
@@ -586,7 +593,7 @@ export default {
       if (item.note_type === 1 || item.note_type === '1') {
         // 跳转详情
         this.$router.push({
-          path: '/videoLibrary/Cartoon',
+          path: '/xibanqiu/Cartoon',
           query: {
             happyid: item.id
           }
@@ -705,7 +712,7 @@ export default {
     },
     setdetaila(item) {
       this.$router.push({
-        path: '/nested/menulist',
+        path: '/ziliao/menulist',
         query: {
           detail: item.id,
           campus_id: 0
@@ -736,7 +743,7 @@ export default {
     },
     videoLibrary() {
       this.$router.push({
-        path: '/videoLibrary/videoLibrary',
+        path: '/xibanqiu',
         query: {
           id: this.makeit
         }
@@ -758,13 +765,13 @@ export default {
 
       this.playerOptions.poster = this.callx[tab.index].cover_img
       this.playerOptions.sources[0].src = this.callx[tab.index].video
-
+      console.log('this.playerOptions', this.playerOptions)
       // this.openvideo = ''
       // this.videoioen = true
     },
     openMX() {
       this.$router.push({
-        path: '/videoLibrary/videoLibrary',
+        path: '/xibanqiu',
         query: {
           id: 2
         }
@@ -828,7 +835,7 @@ export default {
     },
     movemust() {
       this.$router.push({
-        path: '/nested/menu'
+        path: '/ziliao'
       })
     },
     setdetail(item) {
@@ -844,7 +851,7 @@ export default {
     },
     setbaike() {
       this.$router.push({
-        path: '/GKword/GKword'
+        path: '/gkbaike'
       })
     },
     GKmust() {
@@ -873,12 +880,12 @@ export default {
     },
     MXcall() {
       this.$router.push({
-        path: '/videoLibrary/videoLibrary'
+        path: '/xibanqiu'
       })
     },
     GKjh() {
       this.$router.push({
-        path: '/videoLibrary/videoLibrary',
+        path: '/xibanqiu',
         query: {
           id: 3
         }
@@ -891,7 +898,7 @@ export default {
     },
     pinpais(item) {
       this.$router.push({
-        path: '/xiniaolist',
+        path: '/xiniao',
         query: {
           item: item.id
         }
@@ -901,40 +908,8 @@ export default {
     onPlayerPlay(player) {
       console.log("play");
     },
-    onPlayerPlay(player) {
-      // console.log('player play!', player)
-    },
     onPlayerPause(player) {
       // console.log('player pause!', player)
-    },
-    onPlayerEnded(player) {
-      // console.log('player ended!', player)
-    },
-    onPlayerLoadeddata(player) {
-      // console.log('player Loadeddata!', player)
-    },
-    onPlayerWaiting(player) {
-      // console.log('player Waiting!', player)
-    },
-    onPlayerPlaying(player) {
-      // console.log('player Playing!', player)
-    },
-    onPlayerTimeupdate(player) {
-      // console.log('player Timeupdate!', player.currentTime())
-    },
-    onPlayerCanplay(player) {
-      // console.log('player Canplay!', player)
-    },
-    onPlayerCanplaythrough(player) {
-      // console.log('player Canplaythrough!', player)
-    },
-    // or listen state event
-    playerStateChanged(playerCurrentState) {
-      console.log('player current update state', playerCurrentState)
-    },
-    // player is ready
-    playerReadied(player) {
-      console.log('example 01: the player is readied', player)
     }
   }
 }

@@ -111,7 +111,7 @@ export default {
       activeNames: '',
       plates: '',
       menulist: '',
-      bannerimg: '',
+      bannerimg: [],
       whatinput: '',
       currentPage1: 1, // 分页开始
       totalorder: 0,
@@ -149,7 +149,6 @@ export default {
         timestamp: timestamp
       }
       referencev2(options).then(res => {
-        console.log('res', res)
         if (res.code === 100) {
           this.columns = res.data.columns
           this.plates = res.data.plates
@@ -165,8 +164,7 @@ export default {
             res.regdate = timestamp
           })
           if (this.columns.length) {
-            this.titlemust = this.columns[0].id
-            console.log('111____', this.titlemust)
+            this.titlemust = this.columns[0].id;
           }
         } else {
           this.$alert(res.message, {
@@ -178,7 +176,7 @@ export default {
       })
       referBannerv2(options).then(res => {
         if (res.code === 100) {
-          this.bannerimg = res
+          this.bannerimg = res.data;
         } else {
           this.$alert(res.message, {
             callback: action => {
@@ -372,7 +370,7 @@ export default {
     },
     whatinputup() {
       this.$router.push({
-        path: '/nested/search',
+        path: '/ziliao/search',
         query: {
           whatinput: this.whatinput,
           campus_id: this.campus_id

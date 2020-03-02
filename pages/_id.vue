@@ -444,7 +444,7 @@ export default {
         })
       } else if (item.type === 3 || item.type === 8) {
         this.$router.push({
-          path: '/example/details',
+          path: '/class/details',
           query: {
             itemlist: item.id,
             campus_id: this.campus_id
@@ -459,7 +459,7 @@ export default {
           }
         } else {
           this.$router.push({
-            path: '/example/details',
+            path: '/class/details',
             query: {
               itemlist: item.target_url
             }
@@ -470,7 +470,7 @@ export default {
           window.open(item.target_url, '_blank')
         } else {
           this.$router.push({
-            path: '/example/details',
+            path: '/class/details',
             query: {
               itemlist: item.target_url,
               campus_id: this.campus_id
@@ -481,7 +481,7 @@ export default {
     },
     openmove() {
       this.$router.push({
-        path: '/example/openress',
+        path: '/class/openress',
         query: {
           campus_id: this.campus_id
         }
@@ -489,7 +489,7 @@ export default {
     },
     opencurriculums() {
       this.$router.push({
-        path: '/example/opencurriculums',
+        path: '/class/opencurriculums',
         query: {
           campus_id: this.campus_id
         }
@@ -507,7 +507,7 @@ export default {
     zhaokao(items) {
       console.log('1111', items)
       this.$router.push({
-        path: '/nested/menu',
+        path: '/ziliao',
         query: {
           campus_id: this.campus_id,
           tabs: items.id
@@ -517,7 +517,7 @@ export default {
     // zanshi
     dakaying(item) {
       this.$router.push({
-        path: '/example/DKdetails',
+        path: '/class/DKdetails',
         query: {
           itemlist: item.id,
           campus_id: this.campus_id
@@ -526,7 +526,7 @@ export default {
     },
     GKlist(item) {
       this.$router.push({
-        path: '/GKword/GKK',
+        path: '/gkbaike/GKK',
         query: {
           itemlist: item.id,
           campus_id: this.campus_id

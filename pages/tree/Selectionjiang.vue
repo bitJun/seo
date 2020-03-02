@@ -482,7 +482,7 @@ export default {
     },
     setdetail(item) {
       this.$router.push({
-        path: '/nested/menulist',
+        path: '/ziliao/menulist',
         query: {
           detail: item.ra_id,
           campus_id: this.campus_id
@@ -492,7 +492,7 @@ export default {
     zhaokao(items) {
       console.log('1111', items)
       this.$router.push({
-        path: '/nested/menu',
+        path: '/ziliao/menu',
         query: {
           campus_id: this.campus_id,
           tabs: items.id
@@ -511,7 +511,7 @@ export default {
     },
     GKlist(item) {
       this.$router.push({
-        path: '/GKword/GKK',
+        path: '/gkbaike/GKK',
         query: {
           itemlist: item.id,
           campus_id: this.campus_id
