@@ -7,7 +7,7 @@
 
 <script>
 // doc: https://panjiachen.github.io/vue-element-admin-site/feature/component/svg-icon.html#usage
-import { isExternal } from '@/utils/validate'
+import { isExternal } from '~/utils/validate'
 
 export default {
   name: 'SvgIcon',
@@ -41,6 +41,9 @@ export default {
         '-webkit-mask': `url(${this.iconClass}) no-repeat 50% 50%`
       }
     }
+  },
+  created () {
+    console.log('this', this)
   }
 }
 </script>

@@ -248,15 +248,22 @@
                                   :options="playerOptions"
                                   @play="onPlayerPlay($event)"
                                   @pause="onPlayerPause($event)" style="width: 700px;" /> -->
-                <div
+                <video
+                  controls="controls"
+                  style="max-height: 600px;width: 700px"
+                  width="100%"
+                  height="auto"
+                  :src="callx[tabIndex].video">
+                </video>
+                <!-- <div
                   class="video-player-box video-player vjs-custom-skin"
                   :playsinline="true"
-                  ref="videoPlayer"
                   @play="onPlayerPlay($event)"
                   @pause="onPlayerPause($event)"
                   style="width: 700px;"
+                  v-if="callx[tabIndex].video!=''"
                   v-video-player:myVideoPlayer="playerOptions">
-                </div>
+                </div> -->
               </div>
             </el-tab-pane>
           </el-tabs>
@@ -358,10 +365,7 @@ export default {
         language: 'zh-CN',
         aspectRatio: '16:9', // 将播放器置于流畅模式，并在计算播放器的动态大小时使用该值。值应该代表一个比例 - 用冒号分隔的两个数字（例如"16:9"或"4:3"）
         fluid: true, // 当true时，Video.js player将拥有流体大小。换句话说，它将按比例缩放以适应其容器。
-        sources: [{
-          type: 'video/mp4', // 这里的种类支持很多种：基本视频格式、直播、流媒体等，具体可以参看git网址项目
-          src: 'https://cdn.theguardian.tv/webM/2015/07/20/150716YesMen_synd_768k_vp8.webm' // url地址
-        }],
+        sources: [],
         hls: true,
         poster: 'http://pic33.nipic.com/20131007/13639685_123501617185_2.jpg', // 你的封面地址
         // width: document.documentElement.clientWidth, // 播放器宽度
@@ -388,7 +392,7 @@ export default {
       columns: '',
       columnsx: '',
       notesx: '',
-      callx: '',
+      callx: [],
       row: 5,
       len: '',
       bkBanners: [],
@@ -408,7 +412,8 @@ export default {
       assQ: false,
       videoioen: true,
       casevideo: '',
-      makeit: ''
+      makeit: '',
+      tabIndex: 0
     }
   },
   head() {
@@ -506,14 +511,20 @@ export default {
         }
         homeXbqv2(options).then(res => {
           if (res.code === 100) {
-            this.cartoon = res.data.cartoon
-            this.columnsx = res.data.columns
-            this.len = res.data.notes.length
-            this.makeit = this.columnsx[0].id
-            this.notesx = res.data.notes
-            this.callx = res.data.call
-            this.playerOptions.poster = res.data.call[0].cover_img
-            this.playerOptions.sources[0].src = res.data.call[0].video
+            console.log('homeXbqv2', res);
+            this.cartoon = res.data.cartoon;
+            this.columnsx = res.data.columns;
+            this.len = res.data.notes.length;
+            this.makeit = this.columnsx[0].id;
+            this.notesx = res.data.notes;
+            this.callx = res.data.call;
+            let source = {
+              type: 'video/mp4',
+              src: res.data.call[0].video
+            }
+            this.playerOptions.poster = res.data.call[0].cover_img;
+            this.playerOptions.sources.push(source);
+            // this.playerOptions.sources[0].src = res.data.call[0].video;
           } else if (res.code === 201 || res.code === 202 || res.code === 203) {
             window.localStorage.clear()
             history.go(0) // 刷新
@@ -664,7 +675,7 @@ export default {
     setdetails(item) {
       if (item.relate_type === 2) {
         this.$router.push({
-          path: '/curriculumlist',
+          path: '/class/curriculumlist',
           query: {
             itemlist: item.relate_id
           }
@@ -672,7 +683,7 @@ export default {
       } else if (item.relate_type === 3 || item.relate_type === 8) {
 
         this.$router.push({
-          path: '/alldetails',
+          path: '/class/alldetails',
           query: {
             itemlist: item.relate_id
           }
@@ -687,7 +698,7 @@ export default {
           }
         } else {
           this.$router.push({
-            path: '/alldetails',
+            path: '/class/alldetails',
             query: {
               itemlist: item.target_url
             }
@@ -700,7 +711,7 @@ export default {
           window.open(item.target_url, '_blank')
         } else {
           this.$router.push({
-            path: '/alldetails',
+            path: '/class/alldetails',
             query: {
               itemlist: item.target_url
             }
@@ -721,7 +732,7 @@ export default {
     },
     dakaying(item) {
       this.$router.push({
-        path: '/allDKdetails',
+        path: '/class/allDKdetails',
         query: {
           itemlist: item.relate_id,
           campus_id: 0
@@ -730,7 +741,7 @@ export default {
     },
     ydays() {
       this.$router.push({
-        path: '/allDKdetails'
+        path: '/class/allDKdetails'
       })
     },
     closeShadow() {
@@ -759,15 +770,14 @@ export default {
       }
     },
     handleClickcall(tab, event) {
-      console.log("tab.....", tab.index)
-
-      console.log("xxxxx:", this.callx[tab.index])
-
-      this.playerOptions.poster = this.callx[tab.index].cover_img
-      this.playerOptions.sources[0].src = this.callx[tab.index].video
-      console.log('this.playerOptions', this.playerOptions)
-      // this.openvideo = ''
-      // this.videoioen = true
+      this.tabIndex = tab.index;
+      this.playerOptions.poster = this.callx[tab.index].cover_img;
+      let source = {
+        type: 'video/mp4',
+        src: this.callx[tab.index].video
+      }
+      this.playerOptions.sources = [];
+      this.playerOptions.sources.push(source);
     },
     openMX() {
       this.$router.push({
@@ -898,10 +908,10 @@ export default {
     },
     pinpais(item) {
       this.$router.push({
-        path: '/xiniao',
-        query: {
-          item: item.id
-        }
+        path: `/xiniao/${item.id}`,
+        // query: {
+        //   item: item.id
+        // }
       })
     },
     //播放回调

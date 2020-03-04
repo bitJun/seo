@@ -442,7 +442,7 @@ export default {
     dakaying(item) {
       // this.$router.push({ path: '/class/DKdetails', query: { itemlist: item.id, campus_id: this.campus_id }})
       this.$router.push({
-        path: 'dashboard/allDKdetails',
+        path: '/class/allDKdetails',
         query: {
           itemlist: item.id,
           campus_id: this.campus_id

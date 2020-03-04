@@ -2,6 +2,9 @@
   color: #33CCD3;
 }
 #teachers{
+  .el-tabs__item {
+    height: auto !important;
+  }
   #buttonddr {
     /*tab切换课程大纲和讲义*/
     .el-tabs__nav-wrap::after {

@@ -48,7 +48,7 @@ export default {
     }
   },
   created() {
-    this.happyid = this.$route.query.item
+    this.happyid = this.$route.params.id
     this.newDay1()
   },
   methods: {

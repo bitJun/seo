@@ -45,7 +45,8 @@
 <script>
 import {
   info,
-  coursewareDetailsv2
+  coursewareDetailsv2,
+  seov2
 } from '@/api/user'
 var _title, _source, _sourceUrl, _pic,
   _url = 'www.xiniaogongkao.com'
@@ -55,7 +56,9 @@ export default {
       MXcalllist: '',
       happyid: '',
       course: '',
-      campus_id: 0
+      campus_id: 0,
+      key_word: '',
+      describe: ''
     }
   },
   head() {
@@ -64,20 +67,33 @@ export default {
       meta: [{
         hid: "description",
         name: "description",
-        content: "犀鸟公考，公考，招教，部队文职，公务员，事业单位，教师招聘，公务员考试网，国家公务员考试网，国考，省考，国家公务员考试，公务员培训"
+        content: this.describe || "犀鸟公考，公考，招教，部队文职，公务员，事业单位，教师招聘，公务员考试网，国家公务员考试网，国考，省考，国家公务员考试，公务员培训"
       }, {
         hid: 'viewport',
         name: 'keywords',
-        content: '犀鸟公考是大学生职业教育服务平台，通过“在线直播+督学系统+游戏化激励+AI”的方式，让考试有效也有趣！提供公务员、事业单位、教师招聘、部队文职等考试服务'
+        content: this.key_word || '犀鸟公考是大学生职业教育服务平台，通过“在线直播+督学系统+游戏化激励+AI”的方式，让考试有效也有趣！提供公务员、事业单位、教师招聘、部队文职等考试服务'
       }]
     }
   },
   created() {
     this.happyid = this.$route.query.itemlist
     this.campus_id = this.$route.query.campus_id
-    this.newDay1()
+    this.newDay1();
+    this.getSeoInfo();
   },
   methods: {
+    getSeoInfo() {
+      let params = {
+        type: 1,
+        id: this.$route.query.itemlist
+      }
+      seov2(params)
+        .then(res=>{
+          console.log('res', res);
+          this.describe = res.data.describe;
+          this.key_word = res.data.key_word;
+        })
+    },
     newDay1() {
       info('').then(res => {
         const timestamp = res

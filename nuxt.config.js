@@ -6,7 +6,7 @@ module.exports = {
   */
   server: {
     port: 9008, // default: 3000
-    host: 'localhost' // default: localhost
+    host: '192.168.3.7' // default: localhost
   },
   router: {
     linkExactActiveClass: 'exact-active-link'

@@ -1,0 +1,247 @@
+
+#calist {
+  .only-one {
+    height: 28px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    -ms-text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+
+  .DK {
+    color: #E6213A;
+    background: #FFE7EA;
+    font-size: 12px;
+    padding: 4px;
+    position: relative;
+    z-index: 99999;
+  }
+
+  .DK::after {
+    width: 0;
+    height: 0;
+    display: block;
+    content: "";
+    position: absolute;
+    top: 17px;
+    right: 6px;
+    z-index: 10;
+    border: 5px solid transparent;
+    border-right: 5px solid #FFE7EA;
+  }
+
+  .el-tabs__nav-next,
+  .el-tabs__nav-prev {
+    line-height: 30px;
+  }
+
+  .play_mp4 {
+    display: none;
+  }
+  .orderthid {
+    width: 1169px;
+    margin: 1% auto;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    margin-bottom: 100px;
+    &_list {
+      display: inline-block;
+      width: 32%;
+      background: #ffffff;
+      margin-bottom: 2%;
+      border-radius: 10px;
+      -moz-border-radius: 10px;
+      -webkit-border-radius: 10px;
+    }
+  }
+  .orderthid::after {
+    content: '';
+    width: 32%;
+  }
+
+  /*// banner 老师图不换行*/
+
+  .el-scrollbar .el-scrollbar__wrap .el-scrollbar__view {
+    white-space: nowrap;
+  }
+
+  .play_mp4ed {
+    display: block !important;
+  }
+
+  .list::after {
+    content: '';
+    width: 214px;
+    border: 1px solid transparent;
+    overflow: hidden;
+  }
+
+  .list {
+    width: 214px;
+    border: 1px solid transparent;
+    overflow: hidden;
+    display: flex;
+    justify-content: center;
+  }
+
+  .alldisplay {
+    width: 1169px;
+    margin: 1% auto;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    text-align: justify;
+    &_list {
+      cursor: pointer;
+      display: inline-block;
+      width: 214px;
+      height: 225px;
+      background: #ffffff;
+      border-radius: 10px;
+      margin-bottom: 2%;
+      &_item {
+        position: relative;
+        &_cover {
+          width: 214px;
+          height: 134px;
+          margin-right: 20px;
+          border-radius: 10px 10px 0 0;
+          -moz-border-radius: 10px 10px 0 0;
+          -webkit-border-radius: 10px 10px 0 0;
+        }
+        &_cover1 {
+          position: absolute;
+          width: 35px;
+          height: 35px;
+          left: 42%;
+          top: 25%;
+          z-index: 9999;
+        }
+        &_name {
+          color: #333333;
+          font-size: 14px;
+          padding: 0 10px;
+        }
+        &_teachername {
+          color: #9AABB8;
+          font-size: 14px;
+          padding: 0 10px;
+          img {
+            width: 16px;
+            height: 13px;
+            vertical-align: middle;
+            margin-bottom: 2px;
+          }
+        }
+      }
+    }
+  }
+
+  .alldisplays {
+    width: 1169px;
+    margin: 1% auto;
+    display: flex;
+    justify-content: left;
+    &_list {
+      cursor: pointer;
+      position: relative;
+      display: inline-block;
+      width: 214px;
+      height: 225px;
+      background: #ffffff;
+      margin-bottom: 2%;
+      margin-right: 25px;
+      border-radius: 10px;
+      -moz-border-radius: 10px;
+      -webkit-border-radius: 10px;
+      &_cover {
+        width: 214px;
+        height: 134px;
+        margin-right: 20px;
+        border-radius: 10px 10px 0 0;
+        -moz-border-radius: 10px 10px 0 0;
+        -webkit-border-radius: 10px 10px 0 0;
+      }
+      &_cover1 {
+        position: absolute;
+        width: 35px;
+        height: 35px;
+        left: 42%;
+        top: 25%;
+        z-index: 9999;
+      }
+      &_name {
+        color: #333333;
+        font-size: 14px;
+        padding: 0 10px;
+      }
+      &_teachername {
+        color: #9AABB8;
+        font-size: 14px;
+        padding: 0 10px;
+        img {
+          width: 16px;
+          height: 13px;
+          vertical-align: middle;
+          margin-bottom: 2px;
+        }
+      }
+    }
+  }
+
+  .alllist {
+    margin: 10px auto;
+    width: 1169px;
+    .el-tabs__item:hover {
+        color: #33CCD3
+    }
+    .el-tabs__active-bar {
+        background-color: #33CCD3;
+    }
+    .el-tabs__item {
+        color: #A2A2A2;
+        font-size: 18px;
+        height: 60px;
+        line-height: 60px;
+    }
+    .el-tabs__item.is-active {
+        color: #333;
+    }
+  }
+
+  #tablist {
+    /*tab切换课程大纲和讲义*/
+    .el-tabs__nav:not(#tab-0) {
+      border-left: 0 !important;
+    }
+    .el-tabs__nav-wrap::after {
+        width: 0
+    }
+    .el-tabs__active-bar {
+        display: none;
+    }
+    .el-tabs__item {
+        height: 28px;
+        line-height: 28px;
+        margin-right: 5px;
+        /*width: 80px;*/
+        padding: 0 15px;
+        text-align: center;
+        border-radius: 20px;
+        font-size: 16px;
+    }
+    .el-tabs__item.is-active {
+        border: 1px solid #33CCD3;
+        color: #ffffff;
+        background: #33CCD3;
+    }
+  }
+  .alllist_main {
+    width: 1169px;
+    margin: 14px auto;
+    height: auto;
+    border-radius: 10px;
+    overflow: hidden;
+  }
+}

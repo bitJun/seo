@@ -7,24 +7,20 @@
     <div v-for="(item, index) in routers" :key="index">
       <el-submenu :index="item.id" v-if="item.children">
         <template slot="title">
-          <!-- <i class="el-icon-location"></i> -->
-          <svg-icon icon-class="dashboard"/>
-          <span>{{item.name}}</span>
+          <span><svg-icon :icon-class="item.icon"/>{{item.name}}</span>
         </template>
         <el-menu-item-group v-for="(json,key) in item.children" :key="key">
           <el-menu-item :index="json.id">
-            <nuxt-link :to="json.path">{{json.name}}</nuxt-link>
-            <!-- <a :href="item.path">
-                      {{json.name}}
-                    </a> -->
+            <nuxt-link :to="json.path">{{json.name}}
+            </nuxt-link>
           </el-menu-item>
         </el-menu-item-group>
       </el-submenu>
       <el-menu-item :index="item.id" v-else>
-        <nuxt-link :to="item.path">{{item.name}}</nuxt-link>
-        <!-- <a :href="item.path">
-                  <span>{{item.name}}</span>
-              </a> -->
+        <nuxt-link :to="item.path">
+          <svg-icon :icon-class="item.icon"/>
+          {{item.name}}
+        </nuxt-link>
       </el-menu-item>
     </div>
   </el-menu>
@@ -42,53 +38,63 @@ export default {
       routers: [{
           id: '1-1',
           name: '首页',
-          path: '/'
+          path: '/',
+          icon: 'dashboard'
         },
         {
           id: '2-0',
           name: '分校',
           path: '',
+          icon: 'example',
           children: [{
               id: '2-1',
               name: '湖南',
-              path: '/hunan'
+              path: '/hunan',
+              icon: 'example'
             },
             {
               id: '2-2',
               name: '山东',
-              path: '/shandong'
+              path: '/shandong',
+              icon: 'example'
             }
           ]
         },
         {
           id: '3-1',
           name: '课程',
-          path: '/class'
+          path: '/class',
+          icon: 'zbkc'
         },
         {
           id: '4-1',
           name: '资料',
-          path: '/ziliao'
+          path: '/ziliao',
+          icon: 'nested'
         },
         {
           id: '5-1',
           name: '公考百科',
-          path: '/gkbaike'
+          path: '/gkbaike',
+          icon: 'baidubaike'
         },
         {
           id: '6-1',
           name: '师资',
-          path: '/teachers'
+          path: '/teachers',
+          icon: 'shizi'
         },
         {
           id: '7-1',
           name: '犀星球',
-          path: '/xibanqiu'
+          path: '/xibanqiu',
+          icon: 'xibanqiu'
         },
         {
           id: '8-1',
           name: '移动学习',
-          path: '/dashboard'
+          path: '/dashboard',
+          icon: 'link'
         },
       ]
     }

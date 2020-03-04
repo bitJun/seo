@@ -1,111 +1,66 @@
 <template>
 <div class="app-container" id="mydetails">
   <div class="banner_list">
-    <img src="/images/guajian1.png" style="width: 619px;height: 292px">
+    <img src="/images/guajian.png">
   </div>
   <div style="width: 1200px;background: #ffffff;height: auto;margin: 0 auto;border-radius: 10px">
     <div style="display: flex;">
       <div style="height: 275px;width: 491px;margin: 50px">
-        <!--          <video v-if="courselist.course_video !== ''" controls="controls" id="video" width="100%" height="100%" :src="courselist.course_video"></video>-->
-        <!--          <img v-else :src="courselist.course_image" style="width: 100%;height: 100%">-->
-        <img :src="overhis.detail_main_img" style="height: 275px;width: 491px;" v-if="overhis.detail_main_video==''">
-        <!-- <video-player
-                  ref="videoPlayer"
-                  class="video-player vjs-custom-skin"
-                  :playsinline="true"
-                  :options="playerOptions"
-                  @play="onPlayerPlay($event)"
-                  @pause="onPlayerPause($event)"
-                  style="width: 491px;height:275px ;"
-                  v-if="overhis.detail_main_video!=''" /> -->
-        <div
-          class="video-player-box video-player vjs-custom-skin"
-          :playsinline="true"
-          @play="onPlayerPlay($event)"
-          @pause="onPlayerPause($event)"
-          @ended="onPlayerEnded($event)"
-          @loadeddata="onPlayerLoadeddata($event)"
-          @waiting="onPlayerWaiting($event)"
-          @playing="onPlayerPlaying($event)"
-          @timeupdate="onPlayerTimeupdate($event)"
-          @canplay="onPlayerCanplay($event)"
-          @canplaythrough="onPlayerCanplaythrough($event)"
-          @ready="playerReadied"
-          @statechanged="playerStateChanged($event)"
-          style="width: 491px;height:275px ;"
-          v-if="overhis.detail_main_video!=''"
-          v-video-player:myVideoPlayer="playerOptions">
-        </div>
+        <video v-if="courselist.course_video !== ''" controls="controls" id="video" width="100%" height="100%" :src="courselist.course_video"></video>
+        <img v-else :src="courselist.desc_image" style="width: 100%;height: 100%">
       </div>
-      <div style="margin: 50px 50px 50px 0">
-        <div style="font-size: 28px;color: #333333;font-weight: bold;margin-bottom: 10px">{{overhis.name}}</div>
-        <div style="color: #999999;margin-bottom: 15px;line-height: 25px;height: 50px" class="over-lists">{{overhis.introduce}}</div>
-        <div style="color: #999999;display: flex;justify-content: space-between;align-items: center"><span>开课时间：{{(class_start).replace(/\-/g,".")}} - {{(class_end).replace(/\-/g,".")}}</span>
-          <span style="margin-right: 20px;color: #484D62;padding-bottom: 4px">
-            <span class="time_obj">{{DJday}}</span><span class="time_list"> 天</span>
-            <span class="time_obj">{{DJhou}}</span><span class="time_list"> 时</span>
-            <span class="time_obj">{{DJmin}}</span><span class="time_list"> 分</span>
-            <span class="time_obj">{{DJsec}}</span><span class="time_list"> 秒</span>
-          </span>
-        </div>
-        <div style="display: flex;margin-top: 85px;align-items: center">
-          <div style="width: 250px">
-            <div style="color: red;font-weight: bold;width: 250px">RMB <span style="font-size: 36px">{{overhis.price}}</span></div>
-            <div style="color: #999999;font-size: 14px"><span>已报{{overhis.totalBuys}}人</span></div>
+      <div style="margin: 50px 0 50px 0">
+        <div style="font-size: 28px;color: #333333;font-weight: bold;margin-bottom: 10px" v-if="courselist.coursename !== ''">{{ courselist.coursename }}</div>
+        <div style="color: #999999;margin-bottom: 20px"><span style="margin-right: 20px">{{ courselist.label_str }}</span><span style="margin-right: 20px" v-if="courselist.start_time&&courselist.start_time !== ''">开课时间：{{ courselist.start_time.substring(0,10).replace(/\-/g,".") }} - {{ courselist.end_time.substring(0,10).replace(/\-/g,".") }}</span><span style="margin-right: 20px">{{ courselist.period}}课时</span></div>
+        <div style="color: #FCC80D;font-weight: bold">距离结束：{{countDownList}}</div>
+        <div style="display: flex;margin-top: 120px;align-items: center">
+          <div>
+            <div style="color: red;font-weight: bold"><img v-if="courselist.is_assemble === 1" src="/images/icon/tuan.png" style="width: 18px;height: 20px;margin-right: 10px">
+              RMB <span v-if="courselist.type !== 8" style="font-size: 36px">{{ courselist.price }}</span>
+              <span v-else style="font-size: 36px">{{ courselist.assemble_price }}</span></div>
+            <div style="color: #999999;font-size: 14px"><span>限售{{ courselist.xnumber }}人</span> | <span v-if="courselist.type !== 8">已报{{ courselist.order_number }}人</span><span v-else>已报{{ courselist.order_number }}人</span></div>
           </div>
           <div>
-            <div style="display: flex;justify-content: flex-end;width: 300px">
-              <div v-if="overhis.is_buy === 1 || overhis.is_buy === '1'">
-                <div class="button_lists" @click="goapp" style="background: #33CCD3;cursor:pointer">
-                  <span>开始学习</span>
+            <div style="display: flex;justify-content: flex-end;margin-left: 60px;width: 312px">
+              <div v-if="courselist.is_pay === 1">
+                <div class="button_lists" style="background: #33CCD3;cursor:pointer" @click="gostuy">
+                  <span>进入课堂</span>
                 </div>
               </div>
-              <div v-else>
-                <div v-if="gameover === true">
+              <div v-else style="display: flex;justify-content: flex-end;width: 312px">
+                <div v-if="courselist.close_time && courselist.close_time <= date">
                   <div class="button_lists" style="background: #F5F5F5;color: #99a9bf">
-                    <span>已结束</span>
+                    <span>已停售</span>
+                  </div>
+                </div>
+                <div v-else-if="courselist.xnumber + courselist.init_order_number <= courselist.order_number">
+                  <div class="button_lists" style="background: #F5F5F5;color: #99a9bf">
+                    <span>已售罄</span>
+                  </div>
+                </div>
+                <div v-else-if="courselist.price === 0 || courselist.price === '0'">
+                  <div class="button_lists" @click="buyMycurriculum" style="cursor:pointer">
+                    <span>免费领取</span>
                   </div>
                 </div>
                 <div v-else>
-                  <div class="button_lists" @click="buyMycurriculum" style="cursor:pointer">
-                    <span>立即购买</span>
+                  <div v-if="courselist.type === 8" style="display: flex">
+                    <div class="button_list" @click="buyMycurriculum" style="cursor:pointer">
+                      <span>RMB<span style="font-size: 24px">{{ courselist.price }}</span></span>
+                      <span style="font-size: 14px">直接购买</span>
+                    </div>
+                    <div class="button_lists" @click="buyMycurriculums" style="cursor:pointer">
+                      <span style="font-size: 12px">RMB<span style="font-size: 20px">{{ courselist.assemble_price }}</span></span>
+                      <span style="font-size: 14px">{{ courselist.assemble_num }}人拼团</span>
+                    </div>
+                  </div>
+                  <div v-else>
+                    <div class="button_lists" @click="buyMycurriculum" style="cursor:pointer">
+                      <span>立即购买</span>
+                    </div>
                   </div>
                 </div>
               </div>
-              <!--                <div v-else style="display: flex;justify-content: flex-end;width: 312px">-->
-              <!--                  <div v-if="courselist.close_time && courselist.close_time <= date">-->
-              <!--                    <div class="button_lists" style="background: #F5F5F5;color: #99a9bf">-->
-              <!--                      <span>已停售</span>-->
-              <!--                    </div>-->
-              <!--                  </div>-->
-              <!--                  <div v-else-if="courselist.xnumber + courselist.init_order_number <= courselist.order_number">-->
-              <!--                    <div class="button_lists" style="background: #F5F5F5;color: #99a9bf">-->
-              <!--                      <span>已售罄</span>-->
-              <!--                    </div>-->
-              <!--                  </div>-->
-              <!--                  <div v-else-if="courselist.price === 0 || courselist.price === '0'">-->
-              <!--                    <div class="button_lists" @click="buyMycurriculum" style="cursor:pointer">-->
-              <!--                      <span>免费领取</span>-->
-              <!--                    </div>-->
-              <!--                  </div>-->
-              <!--                  <div v-else>-->
-              <!--                    <div v-if="courselist.is_assemble === 1" style="display: flex">-->
-              <!--                      <div class="button_list" @click="buyMycurriculum" style="cursor:pointer">-->
-              <!--                        <span>RMB<span style="font-size: 24px">{{ courselist.price }}</span></span>-->
-              <!--                        <span style="font-size: 14px">直接购买</span>-->
-              <!--                      </div>-->
-              <!--                      <div  class="button_lists" @click="buyMycurriculums" style="cursor:pointer">-->
-              <!--                        <span>RMB<span style="font-size: 24px">{{ courselist.assemble_price }}</span></span>-->
-              <!--                        <span style="font-size: 14px">{{ courselist.assemble_num }}人拼团</span>-->
-              <!--                      </div>-->
-              <!--                    </div>-->
-              <!--                    <div v-else>-->
-              <!--                      <div class="button_lists" @click="buyMycurriculum" style="cursor:pointer">-->
-              <!--                        <span>立即购买</span>-->
-              <!--                      </div>-->
-              <!--                    </div>-->
-              <!--                  </div>-->
-              <!--                </div>-->
             </div>
           </div>
         </div>
@@ -128,11 +83,77 @@
       </div>
     </div>
     <div style="margin: 50px 50px 50px 0;width: 100%">
-      <div style="width: 100%">
-        <!--          <div v-for="(item,index) in courselist.desc" v-bind:key="index.url">-->
-        <!--            <div><img style="width: 100%" :src="item.image_url" alt=""></div>-->
-        <!--          </div>-->
-        <img :src="overhis.detail_img" style="width: 100%;border-radius: 40px">
+      <el-tabs v-model="activeName">
+        <el-tab-pane label="课程简介" name="first" :key="'first'">
+          <div style="width: 100%">
+            <div v-for="(item,index) in courselist.desc" v-bind:key="index.url">
+              <div><img style="width: 750px;border-radius: 40px" :src="item.image_url" alt=""></div>
+            </div>
+          </div>
+        </el-tab-pane>
+        <el-tab-pane label="课程大纲" name="second" :key="'second'">
+          <div>
+            <div style="border-bottom: 1px solid #E9E9E9;display: flex;justify-content: space-between;align-items: center;margin-left: 40px;position: relative;padding: 20px 0" v-for="(item,index) in courselist.courseware" v-bind:key="index.url">
+              <div>
+                <div style="background: #E4E4E4;color: #333333;padding: 0 8px;border-radius: 6px;position: absolute;left: -40px">{{ index+1 }}</div>
+                <div>{{ item.name }}</div>
+                <div style="color: #A8A8A8;margin-top: 10px">{{ item.teacher_nickname }} <span>{{ item.start_time.substring(0,16).replace(/\-/g,".") }}</span>-<span>{{ item.end_time.substring(10,16).replace(/\-/g,".") }}</span></div>
+              </div>
+            </div>
+          </div>
+        </el-tab-pane>
+      </el-tabs>
+    </div>
+  </div>
+  <div v-if="movetitle === true" style="width: 850px;background: #ffffff;position: fixed;top: 0;height: 70px;margin-left: 22%;z-index: 99;display: flex;justify-content: space-between;align-items: center">
+    <div style="display: flex;margin-left: 40px" class="tab_title">
+      <div v-if="twotitle === 1" style="background: #33CCD3;color: #ffffff;border-radius: 20px;padding: 0 20px;font-size: 14px;height: 40px;text-align: center;line-height: 40px">课程简介</div>
+      <div v-if="twotitle === 0" style="background: #f5f5f5;color: #666666;border-radius: 20px;padding: 0 20px;font-size: 14px;height: 40px;text-align: center;line-height: 40px;" @click="moveone">课程简介</div>
+      <div v-if="titetwo === 1" style="background: #f5f5f5;color: #666666;border-radius: 20px;padding: 0 20px;font-size: 14px;height: 40px;text-align: center;line-height: 40px;margin-left: 20px" @click="movetwo">课程大纲</div>
+      <div v-if="titetwo === 0" style="background: #33CCD3;color: #ffffff;border-radius: 20px;padding: 0 20px;font-size: 14px;height: 40px;text-align: center;line-height: 40px;margin-left: 20px">课程大纲</div>
+    </div>
+    <!--      <div style="visibility: hidden;background: #E6213A;color: #ffffff;border-radius: 30px;width: 176px;height: 49px;text-align: center;line-height: 49px;margin-right: 30px">-->
+    <!--        立即购买-->
+    <!--      </div>-->
+    <div style="display: flex;justify-content: flex-end;margin-left: 60px;width: 312px">
+      <div v-if="courselist.is_pay === 1">
+        <div class="button_lists" style="background: #33CCD3;cursor:pointer" @click="gostuy">
+          <span>进入课堂</span>
+        </div>
+      </div>
+      <div v-else style="display: flex;justify-content: flex-end;width: 312px">
+        <div v-if="courselist.close_time && courselist.close_time <= date">
+          <div class="button_lists" style="background: #F5F5F5;color: #99a9bf">
+            <span>已停售</span>
+          </div>
+        </div>
+        <div v-else-if="courselist.xnumber + courselist.init_order_number <= courselist.order_number">
+          <div class="button_lists" style="background: #F5F5F5;color: #99a9bf">
+            <span>已售罄</span>
+          </div>
+        </div>
+        <div v-else-if="courselist.price === 0 || courselist.price === '0'">
+          <div class="button_lists" @click="buyMycurriculum" style="cursor:pointer">
+            <span>免费领取</span>
+          </div>
+        </div>
+        <div v-else>
+          <div v-if="courselist.type === 8" style="display: flex">
+            <div class="button_list" @click="buyMycurriculum" style="cursor:pointer">
+              <span>RMB<span style="font-size: 24px">{{ courselist.price }}</span></span>
+              <span style="font-size: 14px">直接购买</span>
+            </div>
+            <div class="button_lists" @click="buyMycurriculums" style="cursor:pointer">
+              <span>RMB<span style="font-size: 24px">{{ courselist.assemble_price }}</span></span>
+              <span style="font-size: 14px">{{ courselist.assemble_num }}人拼团</span>
+            </div>
+          </div>
+          <div v-else>
+            <div class="button_lists" @click="buyMycurriculum" style="cursor:pointer">
+              <span>立即购买</span>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   </div>
@@ -321,29 +342,19 @@
       </div>
     </div>
   </el-dialog>
-  <!--    // 进入课堂二维码展示-->
-  <div>
-    <el-dialog :visible.sync="dialogVisiblesapp" :append-to-body="true" :before-close="handleClose" :close-on-click-modal="false" custom-class="dialog_list_nav">
-      <div style="text-align: center">
-        <div style="font-size: 20px;margin-bottom: 50px;margin-top: 10px">打卡营需前往<span style="color: #33CCD3;">犀鸟APP</span>完成打卡</div>
-        <img style="width: 213px;height: 213px;" src="/images/gongkao.png" alt="">
-        <div style="background: #F1F5F8;width: 80%;border-radius: 20px;margin: 40px auto;padding: 10px 0">如果您未下载APP，打开微信扫一扫下载</div>
-      </div>
-    </el-dialog>
-  </div>
 </div>
 </template>
 
 <script>
 import {
+  courseInfo,
   info,
   phoneLogin,
-  campInfov2,
-  courseRecommendv2,
-  seov2,
+  courseRecommendv2
+} from '@/api/user'
+import {
   loginphone
-} from '~/api/user';
-import dayjs from 'dayjs'
+} from '@/api/user'
 var TIME_COUNT = 60 // 更改倒计时时间
 export default {
   data() {
@@ -360,30 +371,6 @@ export default {
       }
     }
     return {
-      playerOptions: {
-        // playbackRates: [0.7, 1.0, 1.5, 2.0], //播放速度
-        autoplay: false, // 如果true,浏览器准备好时开始回放。
-        muted: false, // 默认情况下将会消除任何音频。
-        loop: false, // 导致视频一结束就重新开始。
-        preload: 'auto', // 建议浏览器在<video>加载元素后是否应该开始下载视频数据。auto浏览器选择最佳行为,立即开始加载视频（如果浏览器支持）
-        language: 'zh-CN',
-        aspectRatio: '16:9', // 将播放器置于流畅模式，并在计算播放器的动态大小时使用该值。值应该代表一个比例 - 用冒号分隔的两个数字（例如"16:9"或"4:3"）
-        fluid: true, // 当true时，Video.js player将拥有流体大小。换句话说，它将按比例缩放以适应其容器。
-        sources: [{
-          type: 'video/mp4', // 这里的种类支持很多种：基本视频格式、直播、流媒体等，具体可以参看git网址项目
-          src: 'https://cdn.theguardian.tv/webM/2015/07/20/150716YesMen_synd_768k_vp8.webm' // url地址
-        }],
-        hls: true,
-        poster: '', // 你的封面地址
-        width: null, // 播放器宽度
-        notSupportedMessage: '此视频暂无法播放，请稍后再试', // 允许覆盖Video.js无法播放媒体源时显示的默认信息。
-        controlBar: {
-          timeDivider: true,
-          durationDisplay: true,
-          remainingTimeDisplay: false,
-          fullscreenToggle: true // 全屏按钮
-        }
-      },
       date: new Date().getTime(), // 绑定的时候 直接绑定的当前时间 就好了
       phonenull: true,
       twotitle: 1,
@@ -393,7 +380,6 @@ export default {
       count: '', // 初始化次数
       timer: null,
       dialogVisible: false,
-      dialogVisiblesapp: false,
       onlogin: false,
       dialogVisibles: false,
       offcall: false,
@@ -420,16 +406,8 @@ export default {
       actEndTime: '',
       flag: false,
       movetitle: false,
-      DJday: '00',
-      DJhou: '00',
-      DJmin: '00',
-      DJsec: '00',
-      overhis: '',
-      class_start: '',
-      class_end: '',
       newadd: '',
-      campus_id: 0,
-      gameover: ''
+      campus_id: ''
     }
   },
   head() {
@@ -461,102 +439,82 @@ export default {
     }
   },
   created() {
-    if (typeof window == 'object') {
-      this.token = window.localStorage.getItem('token')
-      this.playerOptions.width = window.document.documentElement.clientWidth;
-    }
-    // 开课倒计时
-    // this.actEndTime = '2020-12-22'
-    this.campus_id = this.$route.query.campus_id
+    this.token = localStorage.getItem('token')
     this.happyid = this.$route.query.itemlist
+    this.campus_id = this.$route.query.campus_id
     info('').then(res => {
       const timestamp = res
       const options = {
-        camp_id: this.happyid,
+        course_id: this.happyid,
         timestamp: timestamp
       }
-      campInfov2(options).then(res => {
+      courseInfo(options).then(res => {
         if (res.code === 100) {
-          this.overhis = res.data
-          this.course_id = res.data.id
-          this.playerOptions.sources[0].src = res.data.detail_main_video
-          this.playerOptions.poster = res.data.detail_main_img
-          this.class_start = dayjs(res.data.class_start * 1000).format('YYYY-MM-DD')
-          this.class_end = dayjs(res.data.class_end * 1000).format('YYYY-MM-DD')
-          this.actEndTime = dayjs(res.data.sale_end * 1000).format('YYYY-MM-DD HH:mm:ss')
-          this.newmust()
-
+          this.courselist = res.data
+          this.actEndTime = res.data.close_time
+          var Dates = this.courselist.close_time.substring(0, 19)
+          Dates = Dates.replace(/-/g, '/')
+          var timestamp = new Date(Dates).getTime()
+          this.courselist.close_time = timestamp
         } else if (res.code === 201 || res.code === 202 || res.code === 203) {
-
-          if (typeof window == 'object') {
-            window.localStorage.clear()
-          }
+          window.localStorage.clear()
           history.go(0) // 刷新
           this.$router.push({
             path: '/dashboard'
           })
         } else {
-          // console.log(res.message)
+          console.log(res.message)
         }
       })
     })
-    this.countDown();
-    this.seoInfo();
+    this.countDown()
+    this.newmust()
   },
   mounted() {
     window.addEventListener('scroll', this.handleScroll)
   },
   methods: {
-    seoInfo() {
-      let params = {
-        type: 1,
-        id: 10160
-      }
-      seov2(params)
-        .then(res => {
-          console.log('res', res);
-        })
-    },
-    buyMycurriculum() {
-      if (this.token === null || this.token === '') {
-        this.loginweixin()
+    // 监听
+    handleScroll() {
+      var scrollTop = window.pageYOffset || document.documentElement.scrollTop || document.body.scrollTop
+      if (scrollTop >= 650) {
+        this.flag = true
+        this.movetitle = true
       } else {
-        this.$router.push({
-          path: '/class/buycurriculum',
-          query: {
-            detail: this.overhis.id,
-            istype: 2
-          }
-        })
+        this.movetitle = false
       }
     },
     newmust() {
       info('').then(res => {
         const timestamp = res
         const options = {
+          course_id: this.happyid,
           campus_id: this.campus_id,
-          course_id: this.course_id,
-          type: 2,
           timestamp: timestamp
         }
         courseRecommendv2(options).then(res => {
           if (res.code === 100) {
             this.newadd = res.data
           } else if (res.code === 201 || res.code === 202 || res.code === 203) {
-            if (typeof window == 'object') {
-              window.localStorage.clear()
-            }
+            window.localStorage.clear()
             history.go(0) // 刷新
             this.$router.push({
               path: '/dashboard'
             })
           } else {
-            // console.log(res.message)
+            console.log(res.message)
           }
         })
       })
     },
+    movetwo() {
+      this.activeName = 'second'
+    },
+    moveone() {
+      this.activeName = 'first'
+    },
     setdetails(item) {
+      console.log("cccc:", item)
       if (item.type === 2) {
         this.$router.push({
           path: '/curriculumlist',
@@ -567,7 +525,15 @@ export default {
         })
       } else if (item.type === 3) {
         this.$router.push({
-          path: '/class/details',
+          path: '/example/details',
+          query: {
+            itemlist: item.id,
+            campus_id: this.campus_id
+          }
+        })
+      } else if (item.type === 8) {
+        this.$router.push({
+          path: '/example/details',
           query: {
             itemlist: item.id,
             campus_id: this.campus_id
@@ -578,7 +544,7 @@ export default {
           window.open(item.target_url, '_blank')
         } else {
           this.$router.push({
-            path: '/class/details',
+            path: '/example/details',
             query: {
               itemlist: item.target_url,
               campus_id: this.campus_id
@@ -587,17 +553,31 @@ export default {
         }
       }
     },
+    buyMycurriculum() {
+      if (this.token === null || this.token === '') {
+        this.loginweixin()
+      } else {
+        this.$router.push({
+          path: '/example/buycurriculum',
+          query: {
+            detail: this.courselist.id,
+            istype: 1
+          }
+        })
+      }
+    },
     buyMycurriculums() {
       // courselist.assemble_price
       if (this.token === null || this.token === '') {
         this.loginweixin()
       } else {
         this.$router.push({
-          path: '/class/buycurriculum',
+          path: '/example/buycurriculum',
           query: {
             detail: this.courselist.id,
             itemlists: this.courselist.assemble_price,
-            tuan: 1
+            tuan: 1,
+            istype: 1
           }
         })
       }
@@ -610,7 +590,7 @@ export default {
     timeFormat(param) {
       return param < 10 ? '0' + param : param
     },
-    countDown() {
+    countDown(it) {
       var interval = setInterval(() => {
         // 获取当前时间，同时得到活动结束时间数组
         let newTime = new Date().getTime()
@@ -639,14 +619,9 @@ export default {
             sec: '00'
           }
           clearInterval(interval)
-          this.gameover = true
           // this.$router.push({ path: '/dashboard' })
         }
-        this.DJday = obj.day
-        this.DJhou = obj.hou
-        this.DJmin = obj.min
-        this.DJsec = obj.sec
-        // this.countDownList = obj.day + '天' + obj.hou + '时' + obj.min + '分' + obj.sec + '秒'
+        this.countDownList = obj.day + '天' + obj.hou + '时' + obj.min + '分' + obj.sec + '秒'
       }, 1000)
     },
     closeShadow() {
@@ -736,22 +711,18 @@ export default {
               this.onlogin = true
               this.dialogVisible = false
               this.Generaltable = res.data
-              if (typeof window == 'object') {
-                window.localStorage.setItem('nickname', this.Generaltable.nickname)
-                window.localStorage.setItem('phone', this.Generaltable.phone)
-                window.localStorage.setItem('token', this.Generaltable.token)
-                window.localStorage.setItem('avatar_url', this.Generaltable.avatar_url)
-                window.localStorage.setItem('userId', this.Generaltable.id)
-              }
+              localStorage.setItem('nickname', this.Generaltable.nickname)
+              localStorage.setItem('phone', this.Generaltable.phone)
+              localStorage.setItem('token', this.Generaltable.token)
+              localStorage.setItem('avatar_url', this.Generaltable.avatar_url)
+              localStorage.setItem('userId', this.Generaltable.id)
               this.$alert('登录成功！', {
                 callback: action => {
                   history.go(0) // 刷新
                 }
               })
             } else if (res.code === 201 || res.code === 202 || res.code === 203) {
-              if (typeof window == 'object') {
-                window.localStorage.clear()
-              }
+              window.localStorage.clear()
               history.go(0) // 刷新
               this.$router.push({
                 path: '/dashboard'
@@ -759,55 +730,16 @@ export default {
             } else if (res.code === 101) {
               this.$alert('请输入正确的手机号或验证码')
             } else {
-              // console.log(res.message)
+              console.log(res.message)
             }
           })
         })
       }
-    },
-    goapp() {
-      // 点击弹框
-      this.dialogVisiblesapp = true
-    },
-    onPlayerPlay(player) {
-      // console.log('player play!', player)
-    },
-    onPlayerPause(player) {
-      // console.log('player pause!', player)
-    },
-    onPlayerEnded(player) {
-      // console.log('player ended!', player)
-    },
-    onPlayerLoadeddata(player) {
-      // console.log('player Loadeddata!', player)
-    },
-    onPlayerWaiting(player) {
-      // console.log('player Waiting!', player)
-    },
-    onPlayerPlaying(player) {
-      // console.log('player Playing!', player)
-    },
-    onPlayerTimeupdate(player) {
-      // console.log('player Timeupdate!', player.currentTime())
-    },
-    onPlayerCanplay(player) {
-      // console.log('player Canplay!', player)
-    },
-    onPlayerCanplaythrough(player) {
-      // console.log('player Canplaythrough!', player)
-    },
-    // or listen state event
-    playerStateChanged(playerCurrentState) {
-      // console.log('player current update state', playerCurrentState)
-    },
-    // player is ready
-    playerReadied(player) {
-      // console.log('example 01: the player is readied', player)
     }
   }
 }
 </script>
 
 <style lang="scss" >
-@import "../../static/styles/dashboard/allDKdetails.scss";
+@import "../../static/styles/dashboard/alldetails.scss";
 </style>
