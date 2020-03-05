@@ -94,45 +94,24 @@ export default {
       }]
     }
   },
+  async asyncData ({ params }) {
+    const timestamp = await info();
+    const options = {
+      type: 4,
+      get_plate: 1,
+      timestamp: timestamp
+    }
+    const { data } = await article(options);
+    const json = await banner(options);
+    return {
+      plates: data.plates,
+      menulist: data.data,
+      totalorder: data.total,
+      bannerimg: json.data,
+    }
+  },
   created() {
-    info('').then(res => {
-      const timestamp = res
-      const options = {
-        type: 4,
-        get_plate: 1,
-        timestamp: timestamp
-      }
-      article(options).then(res => {
-        if (res.code === 100) {
-          this.plates = res.data.plates
-          this.menulist = res.data.data
-          this.totalorder = res.data.total
-          this.menulist.forEach(function (res) {
-            var Dates = res.regdate.substring(0, 19)
-            Dates = Dates.replace(/-/g, '/')
-            var timestamp = new Date(Dates).getTime()
-            res.regdate = timestamp
-          })
-        } else {
-          this.$alert(res.message, {
-            callback: action => {
-              this.$router.back(-1)
-            }
-          })
-        }
-      })
-      banner(options).then(res => {
-        if (res.code === 100) {
-          this.bannerimg = res.data
-        } else {
-          this.$alert(res.message, {
-            callback: action => {
-              this.$router.back(-1)
-            }
-          })
-        }
-      })
-    })
+
   },
   methods: {
     setTimedays(time) {

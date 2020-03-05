@@ -203,7 +203,124 @@ export default {
       }]
     }
   },
+  async asyncData ({ params }) {
+    const timestamp = await info();
+    const options = {
+      campus_id: 0,
+      project_id: 0,
+      lable_id: 0,
+      get_lable: 1,
+      timestamp: timestamp
+    }
+    const { data } = await branchRecommendv2(options);
+    let taglist = data.lables;
+    let json;
+    let taglists = null;
+    let menulist = null;
+    let plates = null;
+    let len = null;
+    if (taglist.length > 1) {
+
+    } else {
+      const optionss = {
+        campus_id: this.campus_id,
+        project_id: this.tab1,
+        lable_id: this.lable_id,
+        get_lable: 1,
+        timestamp: timestamp
+      }
+      json = await branchRecommendv2(optionss);
+      taglists = json.data.lables
+      menulist = json.data.data.data
+      plates = json.data.project
+      len = json.data.data.data
+    }
+    return {
+      taglists,
+      menulist,
+      plates,
+      len,
+    }
+  },
   created() {
+    info('').then(res => {
+        const timestamp = res;
+        const options = {
+          campus_id: this.campus_id,
+          project_id: this.tab1,
+          lable_id: this.tab2,
+          get_lable: 1,
+          timestamp: timestamp
+        }
+        branchRecommendv2(options).then(res => {
+          if (res.code === 100) {
+            this.taglists = res.data.lables;
+            if (this.taglists.length > 1) {
+              if (this.taglists[0].cl_id === 0) {
+                this.lable_id = this.taglists[1].cl_id
+                this.activeName2 = '1'
+              } else {
+                this.lable_id = this.taglists[0].cl_id
+                this.activeName2 = '0'
+              }
+              const optionss = {
+                campus_id: this.campus_id,
+                project_id: this.tab1,
+                lable_id: this.lable_id,
+                get_lable: 1,
+                pagesize: 18,
+                timestamp: timestamp
+              }
+              branchRecommendv2(optionss).then(res => {
+                if (res.code === 100) {
+                  this.taglists = res.data.lables
+                  this.menulist = res.data.data.data
+                  this.plates = res.data.project
+                  this.len = this.menulist.length
+                } else {
+                  this.$alert(res.message, {
+                    callback: action => {
+                      this.$router.back(-1)
+                    }
+                  })
+                }
+              })
+            } else if (this.taglists.length === 1) {
+              this.lable_id = this.taglists[0].cl_id
+              const optionss = {
+                campus_id: this.campus_id,
+                project_id: this.tab1,
+                lable_id: this.lable_id,
+                get_lable: 1,
+                timestamp: timestamp
+              }
+              this.activeName2 = '0'
+              branchRecommendv2(optionss).then(res => {
+                if (res.code === 100) {
+                  this.taglists = res.data.lables
+                  this.menulist = res.data.data.data
+                  this.plates = res.data.project
+                  this.len = this.menulist.length
+                } else {
+                  this.$alert(res.message, {
+                    callback: action => {
+                      this.$router.back(-1)
+                    }
+                  })
+                }
+              })
+            } else {
+              this.lable_id = 0
+            }
+          } else {
+            this.$alert(res.message, {
+              callback: action => {
+                this.$router.back(-1)
+              }
+            })
+          }
+        })
+      })
     this.newDay1();
     // this.seoInfo();
   },

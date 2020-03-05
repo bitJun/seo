@@ -160,8 +160,28 @@ export default {
       }]
     }
   },
+  async asyncData ({ params }) {
+    const timestamp = await info();
+    const options = {
+      column_id: 0,
+      source: 0,
+      get_column: 1,
+      timestamp: timestamp
+    }
+    const { data } = await xbqv2(options);
+    console.log('dasdasd', data);
+    return {
+      tablists: data.columns,
+      lmid: data.columns[0].id,
+      tabinfo: data.columnInfo,
+      menulist: data.notes.data,
+      len: data.notes.data,
+      totalorder: data.notes.total,
+      per_page: data.notes.per_page,
+    }
+  },
   created() {
-    this.xbqcolumns();
+    // this.xbqcolumns();
     if (this.$route.query.id) {
       let cc = (this.$route.query.id - 1);
       this.istype = this.$route.query.id;
