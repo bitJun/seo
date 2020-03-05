@@ -430,145 +430,98 @@ export default {
       }]
     }
   },
+  async asyncData ({ params }) {
+    // const { data } = await axios.get(`https://my-api/posts/${params.id}`)
+    // return { title: data.title }
+    const timestamp = await info();
+    let options = {
+      timestamp1: timestamp
+    }
+    const { data } = await homev2(options);
+    const optionsa = {
+      campus_id: 0,
+      project_id: 0,
+      timestamp: timestamp
+    }
+    const json = await homeCoursev2(optionsa);
+    const jsondata = await homeXbqv2(options);
+    return {
+      timestamp: timestamp,
+      banners: data.banners,
+      news: data.news,
+      columns: data.columns,
+      bkBanners: data.bkBanners,
+      labels: data.labels,
+      bkArticles: data.bkArticles,
+      articles: data.articles,
+      infolist: data.info,
+      courselist: json.data.recommend,
+      free: json.data.free,
+      cartoon: jsondata.data.cartoon,
+      columnsx: jsondata.data.columns,
+      len: jsondata.data.notes.length,
+      makeit: jsondata.data.columns[0].id,
+      notesx: jsondata.data.notes,
+      callx: jsondata.data.call,
+    }
+  },
   created() {
-    this.homev2()
-    this.homeXbqv2()
-    this.kc()
+    // this.homev2()
+    // this.homeXbqv2()
+    // this.kc()
   },
   methods: {
-    // v2
-    kc() {
-      info('').then(res => {
-        const timestamp = res;
-        const optionsa = {
-          campus_id: 0,
-          project_id: 0,
-          timestamp: timestamp
-        }
-        homeCoursev2(optionsa).then(json => {
-          console.log('json', json);
-          if (json.code === 100) {
-            this.courselist = json.data.recommend
-            this.free = json.data.free
-          } else if (json.code === 201 || json.code === 202 || json.code === 203) {
-            window.localStorage.clear()
-            history.go(0) // 刷新
-            this.$router.push({
-              path: '/dashboard'
-            })
-          } else {
-            console.log(res.data.message)
-          }
-        })
-      })
-    },
-    homev2() {
-      info('').then(res => {
-        const timestamp = res;
-        const options = {
-          timestamp1: timestamp
-        }
-        homev2(options).then(res => {
-          console.log('res', res)
-          if (res.code === 100) {
-            this.banners = res.data.banners
-            this.news = res.data.news
-            this.columns = res.data.columns
-            this.bkBanners = res.data.bkBanners
-            this.labels = res.data.labels
-            this.bkArticles = res.data.bkArticles
-            this.articles = res.data.articles
-            this.infolist = res.data.info
-            this.news.forEach(function (res) {
-              var Dates = res.create_time.substring(0, 19)
-              Dates = Dates.replace(/-/g, '/')
-              var timestamp = new Date(Dates).getTime()
-              res.create_time = timestamp
-            })
-            this.articles.forEach(function (res) {
-              var Dates = res.regdate.substring(0, 19)
-              Dates = Dates.replace(/-/g, '/')
-              var timestamp = new Date(Dates).getTime()
-              res.regdate = timestamp
-            })
-          } else if (res.code === 201 || res.code === 202 || res.code === 203) {
-            window.localStorage.clear()
-            history.go(0) // 刷新
-            this.$router.push({
-              path: '/dashboard'
-            })
-          } else {
-            console.log(res.data.message)
-          }
-        })
-      })
-    },
-    homeXbqv2() {
-      info('').then(res => {
-        const timestamp = res;
-        const options = {
-          timestamp: timestamp
-        }
-        homeXbqv2(options).then(res => {
-          if (res.code === 100) {
-            console.log('homeXbqv2', res);
-            this.cartoon = res.data.cartoon;
-            this.columnsx = res.data.columns;
-            this.len = res.data.notes.length;
-            this.makeit = this.columnsx[0].id;
-            this.notesx = res.data.notes;
-            this.callx = res.data.call;
-            let source = {
-              type: 'video/mp4',
-              src: res.data.call[0].video
-            }
-            this.playerOptions.poster = res.data.call[0].cover_img;
-            this.playerOptions.sources.push(source);
-            // this.playerOptions.sources[0].src = res.data.call[0].video;
-          } else if (res.code === 201 || res.code === 202 || res.code === 203) {
-            window.localStorage.clear()
-            history.go(0) // 刷新
-            this.$router.push({
-              path: '/dashboard'
-            })
-          } else {
-            console.log(res.data.message)
-          }
-        })
-      })
-    },
     handleClicks(tab, event) {
       // banner下面的切换
-      this.articles = []
+      const key = tab.$vnode.key;
       // console.log('banner下面切换', tab.$vnode.key)
-      info('').then(res => {
-        const timestamp = res.data
-        const options = {
-          source: 1,
-          pagesize: 6,
-          campus_id: 0,
-          column_id: tab.$vnode.key,
-          timestamp: timestamp
-        }
-        referencev2(options).then(res => {
-          if (res.code === 100) {
-            this.articles = res.data.articles.data
-            this.articles.forEach(function (res) {
-              var Dates = res.regdate.substring(0, 19)
-              Dates = Dates.replace(/-/g, '/')
-              var timestamp = new Date(Dates).getTime()
-              res.regdate = timestamp
-            })
-          } else if (res.code === 201 || res.code === 202 || res.code === 203) {
-            window.localStorage.clear()
-            history.go(0) // 刷新
-            this.$router.push({
-              path: '/dashboard'
-            })
-          } else {
-            console.log(res.data.message)
-          }
-        })
+      this.referencev2(key);
+      // info('').then(res => {
+      //   const timestamp = res.data
+      //   const options = {
+      //     source: 1,
+      //     pagesize: 6,
+      //     campus_id: 0,
+      //     column_id: tab.$vnode.key,
+      //     timestamp: timestamp
+      //   }
+      //   referencev2(options).then(res => {
+      //     if (res.code === 100) {
+      //       this.articles = res.data.articles.data
+      //       this.articles.forEach(function (res) {
+      //         var Dates = res.regdate.substring(0, 19)
+      //         Dates = Dates.replace(/-/g, '/')
+      //         var timestamp = new Date(Dates).getTime()
+      //         res.regdate = timestamp
+      //       })
+      //     } else if (res.code === 201 || res.code === 202 || res.code === 203) {
+      //       window.localStorage.clear()
+      //       history.go(0) // 刷新
+      //       this.$router.push({
+      //         path: '/dashboard'
+      //       })
+      //     } else {
+      //       console.log(res.data.message)
+      //     }
+      //   })
+      // })
+    },
+    async referencev2(key) {
+      const options = {
+        source: 1,
+        pagesize: 6,
+        campus_id: 0,
+        column_id: key,
+        timestamp: this.timestamp
+      }
+      const { data } = referencev2(options)
+      this.articles = [];
+      this.articles = data.articles.data;
+      this.articles.forEach(function (res) {
+        var Dates = res.regdate.substring(0, 19)
+        Dates = Dates.replace(/-/g, '/')
+        var timestamp = new Date(Dates).getTime()
+        res.regdate = timestamp
       })
     },
     GKlist(item) {
@@ -788,60 +741,92 @@ export default {
       })
     },
     handleClickBK(tab, event) {
+      const key = tab.$vnode.key;
+      this.bkv2(key)
+      // this.bkArticles = []
+      // info('').then(res => {
+      //   const timestamp = res.data
+      //   const options = {
+      //     type: 1,
+      //     source: 1,
+      //     label_id: tab.$vnode.key,
+      //     pagesize: 5,
+      //     get_label: 0,
+      //     timestamp: timestamp
+      //   }
+      //   bkv2(options).then(res => {
+      //     if (res.code === 100) {
+      //       this.bkArticles = res.data.news.data
+      //     } else if (res.code === 201 || res.code === 202 || res.code === 203) {
+      //       window.localStorage.clear()
+      //       history.go(0) // 刷新
+      //       this.$router.push({
+      //         path: '/dashboard'
+      //       })
+      //     } else {
+      //       console.log(res.data.message)
+      //     }
+      //   })
+      // })
+    },
+    async bkv2 (key) {
+      console.log(key)
+      const options = {
+        type: 1,
+        source: 1,
+        label_id: key,
+        pagesize: 5,
+        get_label: 0,
+        timestamp: this.timestamp
+      }
+      const { data } = await bkv2(options);
       this.bkArticles = []
-      info('').then(res => {
-        const timestamp = res.data
-        const options = {
-          type: 1,
-          source: 1,
-          label_id: tab.$vnode.key,
-          pagesize: 5,
-          get_label: 0,
-          timestamp: timestamp
-        }
-        bkv2(options).then(res => {
-          if (res.code === 100) {
-            this.bkArticles = res.data.news.data
-          } else if (res.code === 201 || res.code === 202 || res.code === 203) {
-            window.localStorage.clear()
-            history.go(0) // 刷新
-            this.$router.push({
-              path: '/dashboard'
-            })
-          } else {
-            console.log(res.data.message)
-          }
-        })
-      })
+      this.bkArticles = data.news.data;
     },
     handleClickxbq(tab, event) {
-      this.notesx = []
-      this.makeit = tab.$vnode.key
-      info('').then(res => {
-        const timestamp = res.data
-        const options = {
-          type: 1,
-          source: 1,
-          column_id: tab.$vnode.key,
-          pagesize: 5,
-          get_column: 0,
-          timestamp: timestamp
-        }
-        xbqv2(options).then(res => {
-          if (res.code === 100) {
-            this.len = res.data.notes.data.length
-            this.notesx = res.data.notes.data
-          } else if (res.code === 201 || res.code === 202 || res.code === 203) {
-            window.localStorage.clear()
-            history.go(0) // 刷新
-            this.$router.push({
-              path: '/dashboard'
-            })
-          } else {
-            console.log(res.data.message)
-          }
-        })
-      })
+      const key = tab.$vnode.key;
+      this.makeit = tab.$vnode.key;
+      this.notesx = [];
+      this.xbqv2(key)
+      // info('').then(res => {
+      //   const timestamp = res.data
+      //   const options = {
+      //     type: 1,
+      //     source: 1,
+      //     column_id: tab.$vnode.key,
+      //     pagesize: 5,
+      //     get_column: 0,
+      //     timestamp: timestamp
+      //   }
+      //   xbqv2(options).then(res => {
+      //     if (res.code === 100) {
+      //       this.len = res.data.notes.data.length
+      //       this.notesx = res.data.notes.data
+      //     } else if (res.code === 201 || res.code === 202 || res.code === 203) {
+      //       window.localStorage.clear()
+      //       history.go(0) // 刷新
+      //       this.$router.push({
+      //         path: '/dashboard'
+      //       })
+      //     } else {
+      //       console.log(res.data.message)
+      //     }
+      //   })
+      // })
+    },
+    async xbqv2 (key) {
+      const options = {
+        type: 1,
+        source: 1,
+        column_id: key,
+        pagesize: 5,
+        get_column: 0,
+        timestamp: this.timestamp
+      }
+      const { data } = await bkv2(options);
+      this.notesx = [];
+      this.len = data.notes.data.length;
+      this.notesx = data.notes.data;
     },
     movemust() {
       this.$router.push({

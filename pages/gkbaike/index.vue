@@ -71,67 +71,67 @@ export default {
       }]
     }
   },
+  async asyncData ({ params }) {
+    const timestamp = await info();
+    const options = {
+      type: 1,
+      source: 0,
+      get_label: 1,
+      timestamp: timestamp
+    }
+    const { data } = await bkv2(options);
+    let label_id = null;
+    if (data.labels.length) {
+       label_id = data.labels[0].id
+    }
+    return {
+      plates: data.labels,
+      menulist: data.news.data,
+      len: data.news.data.length,
+      label_id: label_id
+    }
+  },
   created() {
-    this.newDay1()
   },
   methods: {
+    async bkv2 (key) {
+      const timestamp = await info();
+      const options = {
+        type: 1,
+        get_plate: 0,
+        label_id: key,
+        timestamp: timestamp
+      }
+      const { data } = await bkv2(options);
+      console.log('daddsd', data);
+    },
     handleClick(tab, event) {
-      this.label_id = tab.$vnode.key
-      info('').then(res => {
-        const timestamp = res
-        // const options = {
-        //     type: 1,
-        //     get_plate: 0,
-        //     label_id: tab.$vnode.key,
-        //     timestamp: timestamp
-        // }
-        const options = {
-          type: 1,
-          get_plate: 0,
-          label_id: tab.$vnode.key,
-          timestamp: timestamp
-        }
-        bkv2(options).then(res => {
-          if (res.code === 100) {
-            this.menulist = res.data.news.data
-            this.len = this.menulist.length
-          } else {
-            this.$alert(res.message, {
-              callback: action => {
-                this.$router.back(-1)
-              }
-            })
-          }
-        })
-      })
+      this.label_id = tab.$vnode.key;
+      const { key } = tab.$vnode;
+      this.bkv2(key);
+      // info('').then(res => {
+      //   const timestamp = res;
+      //   const options = {
+      //     type: 1,
+      //     get_plate: 0,
+      //     label_id: tab.$vnode.key,
+      //     timestamp: timestamp
+      //   }
+      //   bkv2(options).then(res => {
+      //     if (res.code === 100) {
+      //       this.menulist = res.data.news.data
+      //       this.len = this.menulist.length
+      //     } else {
+      //       this.$alert(res.message, {
+      //         callback: action => {
+      //           this.$router.back(-1)
+      //         }
+      //       })
+      //     }
+      //   })
+      // })
     },
-    newDay1() {
-      info('').then(res => {
-        const timestamp = res
-        const options = {
-          type: 1,
-          source: 0,
-          get_label: 1,
-          timestamp: timestamp
-        }
-        bkv2(options).then(res => {
-          if (res.code === 100) {
-            this.plates = res.data.labels
-            this.menulist = res.data.news.data
-            this.len = this.menulist.length
-            if (this.plates.length) {
-              this.label_id = this.plates[0].id
-            }
-          } else {
-            this.$alert(res.message, {
-              callback: action => {
-                this.$router.back(-1)
-              }
-            })
-          }
-        })
-      })
-    },
+
     table(index) {
       this.num = index
     },
@@ -155,22 +155,6 @@ export default {
           item: this.whatinput
         }
       })
-      // info('').then(res => {
-      //   const timestamp = res
-      //   const options = { label_id: this.label_id, type: 1, get_plate: 0, keyword: this.whatinput, timestamp: timestamp }
-      //   bkv2(options).then(res => {
-      //     if (res.code === 100) {
-      //       this.menulist = res.data.news.data
-      //       this.len = this.menulist.length
-      //     } else {
-      //       this.$alert(res.message, {
-      //         callback: action => {
-      //           this.$router.back(-1)
-      //         }
-      //       })
-      //     }
-      //   })
-      // })
     }
   }
 }

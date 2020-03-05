@@ -138,54 +138,73 @@ export default {
       }]
     }
   },
+  async asyncData ({ params }) {
+    const timestamp = await info();
+    const options = {
+      campus_id: '',
+      get_column: 1,
+      timestamp: timestamp
+    }
+    const { data } = await referencev2(options);
+    const json = await referBannerv2(options);
+    return {
+      columns: data.columns,
+      plates: data.plates,
+      newplates: data.plates,
+      newprojects: data.projects,
+      menulist: data.articles.data,
+      totalorder: data.articles.total,
+      bannerimg: json.data
+    }
+  },
   created() {
     this.campus_id = this.$route.query.campus_id
     this.tabs = this.$route.query.tabs
-    info('').then(res => {
-      const timestamp = res
-      const options = {
-        campus_id: this.campus_id,
-        get_column: 1,
-        timestamp: timestamp
-      }
-      referencev2(options).then(res => {
-        if (res.code === 100) {
-          this.columns = res.data.columns
-          this.plates = res.data.plates
-          // this.totalorder = res.total
-          this.newplates = res.data.plates
-          this.newprojects = res.data.projects
-          this.menulist = res.data.articles.data
-          this.totalorder = res.data.articles.total
-          this.menulist.forEach(function (res) {
-            var Dates = res.regdate.substring(0, 19)
-            Dates = Dates.replace(/-/g, '/')
-            var timestamp = new Date(Dates).getTime()
-            res.regdate = timestamp
-          })
-          if (this.columns.length) {
-            this.titlemust = this.columns[0].id;
-          }
-        } else {
-          this.$alert(res.message, {
-            callback: action => {
-              this.$router.back(-1)
-            }
-          })
-        }
-      })
-      referBannerv2(options).then(res => {
-        if (res.code === 100) {
-          this.bannerimg = res.data;
-        } else {
-          this.$alert(res.message, {
-            callback: action => {
-              this.$router.back(-1)
-            }
-          })
-        }
-      })
-    })
+    // info('').then(res => {
+    //   const timestamp = res
+    //   const options = {
+    //     campus_id: this.campus_id,
+    //     get_column: 1,
+    //     timestamp: timestamp
+    //   }
+    //   referencev2(options).then(res => {
+    //     if (res.code === 100) {
+    //       this.columns = res.data.columns
+    //       this.plates = res.data.plates
+    //       // this.totalorder = res.total
+    //       this.newplates = res.data.plates
+    //       this.newprojects = res.data.projects
+    //       this.menulist = res.data.articles.data
+    //       this.totalorder = res.data.articles.total
+    //       this.menulist.forEach(function (res) {
+    //         var Dates = res.regdate.substring(0, 19)
+    //         Dates = Dates.replace(/-/g, '/')
+    //         var timestamp = new Date(Dates).getTime()
+    //         res.regdate = timestamp
+    //       })
+    //       if (this.columns.length) {
+    //         this.titlemust = this.columns[0].id;
+    //       }
+    //     } else {
+    //       this.$alert(res.message, {
+    //         callback: action => {
+    //           this.$router.back(-1)
+    //         }
+    //       })
+    //     }
+    //   })
+    //   referBannerv2(options).then(res => {
+    //     if (res.code === 100) {
+    //       this.bannerimg = res.data;
+    //     } else {
+    //       this.$alert(res.message, {
+    //         callback: action => {
+    //           this.$router.back(-1)
+    //         }
+    //       })
+    //     }
+    //   })
+    // })
   },
   methods: {
     setTimedays(time) {

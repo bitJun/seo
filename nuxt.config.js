@@ -6,7 +6,7 @@ module.exports = {
   */
   server: {
     port: 9008, // default: 3000
-    host: '192.168.3.7' // default: localhost
+    host: 'localhost' // default: localhost
   },
   router: {
     linkExactActiveClass: 'exact-active-link'
@@ -43,7 +43,7 @@ module.exports = {
   ** Plugins to load before mounting the App
   */
   plugins: [
-    '~plugins/element-ui',
+    {src: '~/plugins/element-ui', ssr: true },
     { src: '~plugins/nuxt-video-player-plugin.js', ssr: false }
   ],
   /*
@@ -62,34 +62,35 @@ module.exports = {
     prefix: '', // baseURL
     credentials: true,
   },
-  proxy: {
-    '/Fco': {
-      target: 'https://wapapi.xiniaogongkao.com', // 代理地址
-      changeOrigin: true,
-      pathRewrite: {
-        '^/Fco': '', //将 /api 替换掉
-      },
-    },
-    '/App': {
-      target: 'https://testapp.xiniaogongkao.com', // 代理地址
-      changeOrigin: true,
-      pathRewrite: {
-        '^/App': '', //将 /api 替换掉
-      },
-    },
-    '/api': {
-      target: 'https://www.xiniaogongkao.com', // 代理地址
-      changeOrigin: true,
-      pathRewrite: {
-        '^/api': '', //将 /api 替换掉
-      },
-    },
-  },
+  // proxy: {
+  //   '/Fco': {
+  //     target: 'https://wapapi.xiniaogongkao.com', // 代理地址
+  //     changeOrigin: true,
+  //     pathRewrite: {
+  //       '^/Fco': '', //将 /api 替换掉
+  //     },
+  //   },
+  //   '/App': {
+  //     target: 'https://testapp.xiniaogongkao.com', // 代理地址
+  //     changeOrigin: true,
+  //     pathRewrite: {
+  //       '^/App': '', //将 /api 替换掉
+  //     },
+  //   },
+  //   '/api': {
+  //     target: 'https://www.xiniaogongkao.com', // 代理地址
+  //     changeOrigin: true,
+  //     pathRewrite: {
+  //       '^/api': '', //将 /api 替换掉
+  //     },
+  //   },
+  // },
   /*
   ** Build configuration
   */
   build: {
     transpile: [/^element-ui/],
+    vendor: ['element-ui'],
     /*
     ** You can extend webpack config here
     */

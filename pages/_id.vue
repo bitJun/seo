@@ -263,22 +263,59 @@ export default {
       ifarticle: ''
     }
   },
-  created() {
-    console.log(this.$route)
-    const { id } = this.$route.params;
-    console.log('id', id);
+  async asyncData ({ params }) {
+    console.log('params', params)
+    const { id } = params;
+    let campus_id = null;
     switch (id) {
       case 'hunan':
-        this.campus_id = 1;
+        campus_id = 1;
         break;
       case 'shandong':
-        this.campus_id = 2;
+        campus_id = 2;
         break;
       default:
-        this.campus_id = 1;
+        campus_id = 1;
         break;
     }
-    this.newDay()
+    const timestamp = await info();
+    const options = {
+      campus_id: id,
+      timestamp: timestamp
+    }
+    const optionsa = {
+      campus_id: id,
+      project_id: 0,
+      timestamp: timestamp
+    }
+    const { data } = await branchDetailsv2(options);
+    const json = await branchIndexv2(optionsa);
+    return {
+      campus_id: id,
+      banners: data.banners,
+      campus_data: data.campus_data,
+      project_data: data.project_data,
+      courselist: json.data.recommend_course,
+      free: json.data.free,
+      ifarticle: json.data.article,
+      article0: json.data.article[0],
+      article1: json.data.article[1],
+    }
+  },
+  created() {
+    // const { id } = this.$route.params;
+    // switch (id) {
+    //   case 'hunan':
+    //     this.campus_id = 1;
+    //     break;
+    //   case 'shandong':
+    //     this.campus_id = 2;
+    //     break;
+    //   default:
+    //     this.campus_id = 1;
+    //     break;
+    // }
+    // this.newDay()
   },
   head() {
     return {

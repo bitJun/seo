@@ -3,7 +3,7 @@ import { MessageBox, Message } from 'element-ui';
 import { stringify } from 'qs';
 
 const service = axios.create({
-  baseURL: '',
+  baseURL: 'https://www.xiniaogongkao.com',
   timeout: 5000,
   headers: {
     'Content-Type': 'application/x-www-form-urlencoded; charset=utf-8',
